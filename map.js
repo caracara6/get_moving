@@ -17,13 +17,20 @@ async function main() {
           
           map.setView(singapore, 12);
 
-
           let searchInput = document.querySelector('#searchInput').value;
-          let userCoords = getLocation();
+          console.log(searchInput)
+          let mapCenter = map.getBounds().getCenter();
+          let response = await searchPlaces(mapCenter.lat, mapCenter.lng, searchInput);
+    
+          let searchResultElement = document.querySelector('#result');
 
-          console.log(userCoords)
-          // which part of the api to search?
-          // get data first
+          for(let eachResult of response.results) {
+            let resultCoordinate = [eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude];
+            let resultMarker = L.marker(resultCoordinate);
+            resultMarker.bindPopup(`<div>${eachResult.name}</div>`)
+            resultMarker.addTo(searchLayer);
+          }
+          searchLayer.addTo(map)
 
 
         
@@ -34,7 +41,7 @@ async function main() {
 
   function initMap() {
     // Initialise map
-    singapore = [1.3521, 103.8198];
+    singapore = [1.3069, 103.8189];
     map = L.map("singaporeMap");
     map.setView(singapore, 12);
 
@@ -63,8 +70,9 @@ async function main() {
         accessToken: 'GSRGuSqDDcYgQnf3k9ESutlUBugw4YctZAzWNSE7iZLhxb0jQZLuHbOXq5etkVAQ'
     });
 
-    let userMarker = L.marker(singapore)
-    userMarker.addTo(map)
+    let userMarker = L.marker(singapore, {draggable : true});
+    let popup = userMarker.bindPopup('Hello').openPopup();
+    popup.addTo(map);
 
     // Set up base layers
     baseMaps = {
@@ -76,6 +84,8 @@ async function main() {
     overlays = {
         // "Search Results": searchLayer
     }
+
+    L.control.scale().addTo(map)
 
     // {collapsed=false}??
     L.control.layers(baseMaps, overlays).addTo(map);
