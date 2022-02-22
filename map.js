@@ -11,24 +11,36 @@ async function main() {
     map = initMap();
 
     window.addEventListener('DOMContentLoaded', function(){
-        
+        console.log("refreshing")
         let searchBtn = document.querySelector('#searchBtn');
         searchBtn.addEventListener('click', async function(){
-          
+          searchLayer.clearLayers();
           map.setView(singapore, 12);
 
           let searchInput = document.querySelector('#searchInput').value;
           console.log(searchInput)
           let mapCenter = map.getBounds().getCenter();
           let response = await searchPlaces(mapCenter.lat, mapCenter.lng, searchInput);
+          console.log(response.results)
     
-          let searchResultElement = document.querySelector('#result');
+          let searchResultElement = document.querySelector('#infoTabSearchResults');
 
           for(let eachResult of response.results) {
             let resultCoordinate = [eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude];
+            console.log(resultCoordinate)
             let resultMarker = L.marker(resultCoordinate);
             resultMarker.bindPopup(`<div>${eachResult.name}</div>`)
             resultMarker.addTo(searchLayer);
+
+            let resultElement = document.createElement('li');
+            resultElement.innerHTML = eachResult.name;
+            resultElement.className = 'resultList';
+
+            resultElement.addEventListener('click', function(){
+              map.flyto(resultCoordinate, 16);
+              resultMarker.openPopup();
+            })
+            searchResultElement.appendChild(resultElement)
           }
           searchLayer.addTo(map)
 
@@ -71,7 +83,7 @@ async function main() {
     });
 
     let userMarker = L.marker(singapore, {draggable : true});
-    let popup = userMarker.bindPopup('Hello').openPopup();
+    let popup = userMarker.bindPopup('Hello');
     popup.addTo(map);
 
     // Set up base layers

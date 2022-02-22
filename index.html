@@ -30,66 +30,67 @@
 
   <body>
     <!-- landing page starts -->
-    <div id="landingPage" class="container page">
-      <div id="searchWrapper" class="d-flex justify-content-center">
-        <h1 class="display-1">Get Sporty</h1>
+    <section id="landingPage" class="container-fluid page d-flex justify-content-center align-items-center px-5 border border-primary">
+      
+      <div id="searchWrapper" class="border border-danger flex-grow-1">
+      <div class="d-flex justify-content-center ">
+        <h1 class="display-1 mt-3">Get Sporty</h1>
       </div>
-      <div id="search" class="d-flex justify-content-center mb-3">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle px-5"
-            type="button"
-            id="dropdownMenuButton2"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown button
-          </button>
-          <ul
-            class="dropdown-menu dropdown-menu-dark"
-            aria-labelledby="dropdownMenuButton2"
-          >
-            <li><a class="dropdown-item active" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-            <form class="d-flex justify-content-center">
-                <input
-                  class="form-control mx-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  id="searchInput"
-                />
-                <button
-                  class="btn btn-outline-success mx-2"
-                  type="submit"
-                  id="searchBtn"
-                >
-                  Search
-                </button>
-              </form>
-          </ul>
-          
+
+      <!-- search input starts -->
+      <!-- <form> -->
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control mt-3"
+            id="searchInput"
+            aria-describedby="emailHelp"
+            placeholder="What's your favourite sport?"
+          />
+          <div id="validation" class="form-text"></div>
         </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" id="searchBtn" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      <!-- </form> -->
       </div>
+    </section>
+      <!-- search input ends -->
     </div>
     <!-- landing page ends -->
 
     <!-- map starts -->
-    <div class="container page">
+    <div class="container-fluid page" id="secondPage">
       <div id="singaporeMap"></div>
+      <ul class="nav nav-pills" id="infoTab">
+        <li class="nav-item">
+          <a class="nav-link active" href="">Active</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Get your heart racing</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" id="badminton" href="">Badminton</a></li>
+            <li><a class="dropdown-item" id="basketball" href="">Basketball</a></li>
+            <li><a class="dropdown-item" id="tennis" href="">Tennis</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          </ul>
+          
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Your results</a>
+          <ul class="dropdown-menu" id="infoTabSearchResults">
+            
+          </ul>
+          
+        </li>
+      </ul>
     </div>
     <!-- map ends -->
 
-    
-
-    <!-- results start-->
-    <section class="container" id="result">
-
-    </section>
-    <!-- results end -->
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
