@@ -1,15 +1,16 @@
 body {
-    background-image: url('images/swimming.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    
   }
 
 #singaporeMap {
     height:100vh;
 }
 #landingPage {
-    height: 100vh
+    height: 100vh;
+    background-image: url('images/swimming.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #secondPage {
@@ -18,13 +19,16 @@ body {
 
 #infoTab {
     position: absolute;
-    bottom: 15px;
+    top: 15px;
     right: 45px;
     z-index: 314159; 
     background-color:rgba(255,255,255,0.7);
+    font-size: 1.5rem;
 
 }
-
+/* .fa-solid {
+    font-size: 1.5rem;
+} */
 .resultList {
     padding: 10px;
 }

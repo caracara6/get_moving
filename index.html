@@ -17,6 +17,10 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
     />
+    <script
+      src="https://kit.fontawesome.com/077919a160.js"
+      crossorigin="anonymous"
+    ></script>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -30,15 +34,16 @@
 
   <body>
     <!-- landing page starts -->
-    <section id="landingPage" class="container-fluid page d-flex justify-content-center align-items-center px-5 border border-primary">
-      
+    <section
+      id="landingPage"
+      class="container page d-flex justify-content-center align-items-center px-5 border border-primary"
+    >
       <div id="searchWrapper" class="border border-danger flex-grow-1">
-      <div class="d-flex justify-content-center ">
-        <h1 class="display-1 mt-3">Get Sporty</h1>
-      </div>
+        <div class="d-flex justify-content-center">
+          <h1 class="display-1 mt-3">Get Sporty</h1>
+        </div>
 
-      <!-- search input starts -->
-      <!-- <form> -->
+        <!-- search input starts -->
         <div class="mb-3">
           <input
             type="text"
@@ -54,38 +59,36 @@
             Submit
           </button>
         </div>
-      <!-- </form> -->
       </div>
     </section>
-      <!-- search input ends -->
-    </div>
+    <!-- search input ends -->
     <!-- landing page ends -->
 
     <!-- map starts -->
-    <div class="container-fluid page" id="secondPage">
+    <div class="container page" id="secondPage">
       <div id="singaporeMap"></div>
-      <ul class="nav nav-pills" id="infoTab">
-        <li class="nav-item">
-          <a class="nav-link active" href="">Active</a>
+
+      <ul class="nav nav-pills rounded shadow" id="infoTab">
+        <li class="nav-item mx-2">
+          <i class="fa-solid fa-dumbbell fa-bounce my-3"></i>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Get your heart racing</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" id="badminton" href="">Badminton</a></li>
-            <li><a class="dropdown-item" id="basketball" href="">Basketball</a></li>
-            <li><a class="dropdown-item" id="tennis" href="">Tennis</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-          </ul>
-          
+        <li class="nav-item mx-2">
+          <i class="fa-solid fa-basketball fa-bounce my-3"></i>
+        </li>
+        <li class="nav-item mx-2">
+          <i class="fa-solid fa-bowling-ball-pin fa-bounce my-3"></i>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Your results</a>
-          <ul class="dropdown-menu" id="infoTabSearchResults">
-            
-          </ul>
-          
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href=""
+            role="button"
+            aria-expanded="false"
+            >Your results</a
+          >
+          <ul class="dropdown-menu" id="infoTabSearchResults"></ul>
         </li>
       </ul>
     </div>

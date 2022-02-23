@@ -28,8 +28,14 @@ async function main() {
           for(let eachResult of response.results) {
             let resultCoordinate = [eachResult.geocodes.main.latitude, eachResult.geocodes.main.longitude];
             console.log(resultCoordinate)
+
+
+            
             let resultMarker = L.marker(resultCoordinate);
-            resultMarker.bindPopup(`<div>${eachResult.name}</div>`)
+            resultMarker.bindPopup(`<div>
+            <div>${eachResult.name}</div>
+            <button type="button" class="btn btn-primary">Get Directions</button>
+            </div>`)
             resultMarker.addTo(searchLayer);
 
             let resultElement = document.createElement('li');
@@ -37,7 +43,11 @@ async function main() {
             resultElement.className = 'resultList';
 
             resultElement.addEventListener('click', function(){
-              map.flyto(resultCoordinate, 16);
+              map.flyTo(resultCoordinate, 16);
+              resultMarker.openPopup();
+            })
+            resultMarker.addEventListener('click', function(){
+              map.flyTo(resultCoordinate, 16);
               resultMarker.openPopup();
             })
             searchResultElement.appendChild(resultElement)
@@ -97,10 +107,10 @@ async function main() {
         // "Search Results": searchLayer
     }
 
-    L.control.scale().addTo(map)
 
     // {collapsed=false}??
-    L.control.layers(baseMaps, overlays).addTo(map);
+    L.control.layers(baseMaps, overlays, {position:"bottomright"}).addTo(map);
+
 
     return map;
   }
