@@ -20,16 +20,16 @@ async function searchPlaces(lat, lng, query) {
     return response.data
 }
 
-async function searchBadminton(lat, lng, query) {
+async function searchSport(lat, lng, sport) {
   let ll = lat + ',' + lng;
   let response = await axios.get(API_BASE_URL + '/places/search',{
     params: {
       ll: ll,
       v: 20220221,
-      query: "badminton",
+      query: sport,
       radius: 25000,
       categories: 18000,
-      limit: 10
+      limit: 20
     },
     headers: {
       Accept: 'application/json',
@@ -39,40 +39,5 @@ async function searchBadminton(lat, lng, query) {
   return response.data
 }
 
-async function searchBasketball(lat, lng, query) {
-  let ll = lat + ',' + lng;
-  let response = await axios.get(API_BASE_URL + '/places/search',{
-    params: {
-      ll: ll,
-      v: 20220221,
-      query: "basketball",
-      radius: 25000,
-      categories: 18000,
-      limit: 10
-    },
-    headers: {
-      Accept: 'application/json',
-      Authorization: API_KEY
-  }
-  })
-  return response.data
-}
 
-async function searchTennis(lat, lng, query) {
-  let ll = lat + ',' + lng;
-  let response = await axios.get(API_BASE_URL + '/places/search',{
-    params: {
-      ll: ll,
-      v: 20220221,
-      query: "tennis",
-      radius: 25000,
-      categories: 18000,
-      limit: 10
-    },
-    headers: {
-      Accept: 'application/json',
-      Authorization: API_KEY
-  }
-  })
-  return response.data
-}
+// function plotCoordinates(response, iconUrl){}
