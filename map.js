@@ -17,9 +17,8 @@ async function main() {
 
       let searchBtn = document.querySelector("#searchBtn");
       searchBtn.addEventListener("click", async function () {
-        searchLayer.clearLayers();
-        sportClusterLayer.clearLayers();
-        map.setView(singapore, 12);
+        resetMap();
+        
 
         let searchInput = document.querySelector("#searchInput").value;
         console.log(searchInput);
@@ -29,6 +28,10 @@ async function main() {
           mapCenter.lng,
           searchInput
         );
+
+        document.querySelector('#dropdownButton').classList.add('show');
+    
+        document.querySelector('#infoTabSearchResults').classList.add('show');
         console.log(response.results);
 
         let searchResultElement = document.querySelector(
@@ -57,6 +60,7 @@ async function main() {
           let resultElement = document.createElement("li");
           resultElement.innerHTML = eachResult.name;
           resultElement.className = "resultList";
+          // document.querySelectorAll('.resultList').style.display = 'block';
 
           resultElement.addEventListener("click", function () {
             map.flyTo(resultCoordinate, 16);
@@ -73,44 +77,53 @@ async function main() {
 
       let gymBtn = document.querySelector("#gymBtn");
       gymBtn.addEventListener("click", async function () {
-        searchLayer.clearLayers();
-        sportClusterLayer.clearLayers();
-        map.setView(singapore, 12);
+        resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "gym");
-        // console.log(response.results)
-
-
-
-
-
-
-
-        //refactor from here???
-
-        for (let eachResult of response.results) {
-          let resultCoordinate = [
-            eachResult.geocodes.main.latitude,
-            eachResult.geocodes.main.longitude,
-          ];
-
-          let resultIcon = L.icon({
-            iconUrl: "icons/dumbbell.svg",
-            iconSize: [35, 35],
-          });
-          let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
-          resultMarker.bindPopup(`<div>
-            <div>${eachResult.name}</div>
-            <button type="button" class="btn btn-primary">Directions</button>
-            </div>`);
-          resultMarker.addTo(sportClusterLayer);
-          sportClusterLayer.addTo(map);
-          resultMarker.addEventListener("click", function () {
-            map.flyTo(resultCoordinate, 16);
-            resultMarker.openPopup();
-          });
-        }
+        plotCoordinates(response.results, "icons/dumbbell.svg");
       });
+
+      let basketballBtn = document.querySelector("#basketballBtn");
+      basketballBtn.addEventListener("click", async function () {
+        resetMap();
+        mapCenter = map.getBounds().getCenter();
+        let response = await searchSport(mapCenter.lat, mapCenter.lng, "basketball");
+        plotCoordinates(response.results, "icons/basketball.svg");
+      });
+
+      let golfBtn = document.querySelector("#golfBtn");
+      golfBtn.addEventListener("click", async function () {
+        resetMap();
+        mapCenter = map.getBounds().getCenter();
+        let response = await searchSport(mapCenter.lat, mapCenter.lng, "golf");
+        plotCoordinates(response.results, "icons/golf.svg");
+      });
+
+      let bowlingBtn = document.querySelector("#bowlingBtn");
+      bowlingBtn.addEventListener("click", async function () {
+        resetMap();
+        mapCenter = map.getBounds().getCenter();
+        let response = await searchSport(mapCenter.lat, mapCenter.lng, "bowling");
+        plotCoordinates(response.results, "icons/bowling.svg");
+      });
+
+      let swimmingBtn = document.querySelector("#swimmingBtn");
+      swimmingBtn.addEventListener("click", async function () {
+        resetMap();
+        mapCenter = map.getBounds().getCenter();
+        let response = await searchSport(mapCenter.lat, mapCenter.lng, "swimming");
+        plotCoordinates(response.results, "icons/swimming.svg");
+      });
+
+      let volleyballBtn = document.querySelector("#volleyballBtn");
+      volleyballBtn.addEventListener("click", async function () {
+        resetMap();
+        mapCenter = map.getBounds().getCenter();
+        let response = await searchSport(mapCenter.lat, mapCenter.lng, "volleyball");
+        plotCoordinates(response.results, "icons/volleyball.svg");
+      });
+
+
     });
   }
 

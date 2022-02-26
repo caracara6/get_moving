@@ -33,75 +33,107 @@
   </head>
 
   <body>
-    <!-- landing page starts -->
-    <section
-      id="landingPage"
-      class="container page d-flex justify-content-center align-items-center px-5 border border-primary"
-    >
-      <div id="searchWrapper" class="border border-danger flex-grow-1">
-        <div class="d-flex justify-content-center">
-          <h1 class="display-1 mt-3">Get Sporty</h1>
-        </div>
+    <div id="allPages">
+      <!-- landing page starts -->
+      <div id="page1" class="page">
+        <section
+          id="landingPage"
+          class="container d-flex justify-content-center align-items-center px-5 border border-primary"
+        >
+          <div id="searchWrapper" class="border border-danger flex-grow-1">
+            <div class="d-flex justify-content-center">
+              <h1 class="display-1 mt-3">Get Sporty</h1>
+            </div>
 
-        <!-- search input starts -->
-        <div class="mb-3">
-          <input
-            type="text"
-            class="form-control mt-3"
-            id="searchInput"
-            aria-describedby="emailHelp"
-            placeholder="What's your favourite sport?"
-          />
-          <div id="validation" class="form-text"></div>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button type="submit" id="searchBtn" class="btn btn-primary">
-            Submit
-          </button>
-        </div>
+            <!-- search input starts -->
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control mt-3"
+                id="searchInput"
+                aria-describedby="emailHelp"
+                placeholder="What's your favourite sport?"
+              />
+              <div id="validation" class="form-text"></div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" id="searchBtn" class="btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </section>
+        <!-- search input ends -->
       </div>
-    </section>
-    <!-- search input ends -->
-    <!-- landing page ends -->
+      <!-- landing page ends -->
 
-    <!-- map starts -->
-    <div class="container page" id="secondPage">
-      <div id="singaporeMap"></div>
+      <!-- map page  starts -->
+      <div id="page2" class="page">
+        <section class="container" id="mapPage">
+          <!-- map starts -->
+          <div id="singaporeMap"></div>
+          <!-- map ends -->
 
-      <ul class="nav nav-pills rounded shadow" id="infoTab">
-        <li class="nav-item mx-2">
-          <i class="fa-solid fa-dumbbell fa-bounce my-3" id="gymBtn"></i>
-        </li>
-        <li class="nav-item mx-2">
-          <i class="fa-solid fa-basketball fa-bounce my-3" id="basketballBtn"></i>
-        </li>
-        <li class="nav-item mx-2">
-          <i class="fa-solid fa-golf-ball-tee fa-bounce my-3" id="golfBtn"></i>
-        </li>
-        <li class="nav-item mx-2">
-          <i class="fa-solid fa-bowling-ball fa-bounce my-3" id="bowlingBtn"></i>
-        </li>
-        <li class="nav-item mx-2">
-          <i class="fa-solid fa-person-swimming fa-bounce my-3" id="swimmingBtn"></i>
-        </li>
-        <li class="nav-item mx-2">
-          <i class="fa-solid fa-volleyball fa-bounce my-3" id="volleyballBtn"></i>
-        </li>
+          <!-- result bar starts -->
+          <ul class="nav nav-pills rounded shadow" id="infoTab">
+            <li class="nav-item ms-2 me-1">
+              <i
+                class="fa-solid fa-circle-arrow-left fa-bounce my-3"
+                id="backBtn"
+              ></i>
+            </li>
+            <li class="nav-item mx-1">
+              <i class="fa-solid fa-dumbbell fa-bounce my-3" id="gymBtn"></i>
+            </li>
+            <li class="nav-item mx-1">
+              <i
+                class="fa-solid fa-basketball fa-bounce my-3"
+                id="basketballBtn"
+              ></i>
+            </li>
+            <li class="nav-item mx-1">
+              <i
+                class="fa-solid fa-golf-ball-tee fa-bounce my-3"
+                id="golfBtn"
+              ></i>
+            </li>
+            <li class="nav-item mx-1">
+              <i
+                class="fa-solid fa-bowling-ball fa-bounce my-3"
+                id="bowlingBtn"
+              ></i>
+            </li>
+            <li class="nav-item mx-1">
+              <i
+                class="fa-solid fa-person-swimming fa-bounce my-3"
+                id="swimmingBtn"
+              ></i>
+            </li>
+            <li class="nav-item mx-1">
+              <i
+                class="fa-solid fa-volleyball fa-bounce my-3"
+                id="volleyballBtn"
+              ></i>
+            </li>
 
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            data-bs-toggle="dropdown"
-            href=""
-            role="button"
-            aria-expanded="false"
-            >Your results</a
-          >
-          <ul class="dropdown-menu" id="infoTabSearchResults"></ul>
-        </li>
-      </ul>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle px-1 py-2"
+                data-bs-toggle="dropdown"
+                href=""
+                id="dropdownButton"
+                role="button"
+                aria-expanded="false"
+                >Your results</a
+              >
+              <ul class="dropdown-menu" id="infoTabSearchResults"></ul>
+            </li>
+          </ul>
+          <!-- results bar ends -->
+        </section>
+      </div>
+      <!-- map page ends -->
     </div>
-    <!-- map ends -->
 
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
@@ -120,7 +152,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="loadData.js"></script>
+    <script src="load_data.js"></script>
     <script src="map.js"></script>
   </body>
 </html>
