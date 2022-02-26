@@ -68,7 +68,7 @@
       <!-- landing page ends -->
 
       <!-- map page  starts -->
-      <div id="page2" class="page">
+      <div id="page2" class="page hidden">
         <section class="container" id="mapPage">
           <!-- map starts -->
           <div id="singaporeMap"></div>
@@ -126,7 +126,17 @@
                 aria-expanded="false"
                 >Your results</a
               >
-              <ul class="dropdown-menu" id="infoTabSearchResults"></ul>
+              <ul
+                class="dropdown-menu"
+                id="infoTabSearchResults"
+                data-popper-placement="bottom-end"
+                style="
+                  position: absolute;
+                  inset: 0px auto auto 0px;
+                  margin: 0px;
+                  transform: translate3d(-57px, 42px, 0px);
+                "
+              ></ul>
             </li>
           </ul>
           <!-- results bar ends -->

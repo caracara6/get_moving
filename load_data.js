@@ -10,7 +10,7 @@ async function searchPlaces(lat, lng, query) {
       query: query,
       radius: 12000,
       categories: 18000,
-      limit: 15,
+      limit: 8,
     },
     headers: {
       Accept: "application/json",

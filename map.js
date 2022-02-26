@@ -18,6 +18,17 @@ async function main() {
       let searchBtn = document.querySelector("#searchBtn");
       searchBtn.addEventListener("click", async function () {
         resetMap();
+
+        let allPages = document.querySelectorAll('.page');
+
+        for(let p of allPages){
+          p.classList.remove('show');
+          p.classList.add('hidden')
+        }
+
+        let page2 = document.querySelector('#page2');
+        page2.classList.remove('hidden');
+        page2.classList.add('show');
         
 
         let searchInput = document.querySelector("#searchInput").value;
@@ -32,6 +43,7 @@ async function main() {
         document.querySelector('#dropdownButton').classList.add('show');
     
         document.querySelector('#infoTabSearchResults').classList.add('show');
+
         console.log(response.results);
 
         let searchResultElement = document.querySelector(
@@ -70,10 +82,26 @@ async function main() {
             map.flyTo(resultCoordinate, 16);
             resultMarker.openPopup();
           });
-          searchResultElement.appendChild(resultElement);
+
+          setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
+          // searchResultElement.appendChild(resultElement);
         }
         searchLayer.addTo(map);
       });
+
+      let backBtn = document.querySelector('#backBtn');
+      backBtn.addEventListener('click', function(){
+        let allPages = document.querySelectorAll('.page');
+        
+        for(let page of allPages){
+          page.classList.remove('show');
+          page.classList.add('hidden');
+        }
+
+        let page1 = document.querySelector('#page1');
+        page2.classList.add('hidden');
+        page1.classList.add('show');
+      })
 
       let gymBtn = document.querySelector("#gymBtn");
       gymBtn.addEventListener("click", async function () {
