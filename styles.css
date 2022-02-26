@@ -8,8 +8,6 @@ body {
 
 #singaporeMap {
     height:100vh;
-    padding-right: 0px!important;
-    padding-left: 0px!important;
 }
 
 #allPages {
@@ -42,6 +40,8 @@ body {
 
 #mapPage {
     position: relative;
+    padding-right: 0px!important;
+    padding-left: 0px!important;
 }
 
 #infoTab {
@@ -52,6 +52,13 @@ body {
     background-color:rgba(255,255,255,0.7);
     font-size: 1rem;
 
+}
+
+#infoTabSearchResults {
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    transform: translate3d(-57px, 42px, 0px);
 }
 .resultList {
     padding: 0.25rem 0.6rem;

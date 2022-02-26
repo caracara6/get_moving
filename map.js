@@ -83,8 +83,8 @@ async function main() {
             resultMarker.openPopup();
           });
 
-          setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
-          // searchResultElement.appendChild(resultElement);
+          // setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
+          searchResultElement.appendChild(resultElement);
         }
         searchLayer.addTo(map);
       });
