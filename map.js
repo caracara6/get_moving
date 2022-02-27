@@ -4,6 +4,7 @@ let lightMode;
 let darkMode;
 let mapCenter;
 let searchLayer = L.layerGroup();
+let cyclingLayer = L.layerGroup();
 let sportClusterLayer = L.markerClusterGroup();
 let baseMaps;
 let overlays;
@@ -13,35 +14,45 @@ async function main() {
     map = initMap();
 
     window.addEventListener("DOMContentLoaded", function () {
-      console.log("refreshing");
 
       let searchBtn = document.querySelector("#searchBtn");
       searchBtn.addEventListener("click", async function () {
-        resetMap();
+        
+        // search validation
+        let emptySearch = false;
 
-        let allPages = document.querySelectorAll('.page');
+        let searchInput = document.querySelector("#searchInput").value;
 
-        for(let p of allPages){
-          p.classList.remove('show');
-          p.classList.add('hidden')
+        if (!searchInput) {
+          emptySearch = true;
         }
 
+        if (emptySearch){
+          let validation = document.querySelector('#searchValidation');
+          validation.innerHTML = 'Please enter a valid search term'
+        } else {
+        resetMap();
+
+        //go to map page
+        let allPages = document.querySelectorAll('.page');
+        for(let page of allPages){
+          page.classList.remove('show');
+          page.classList.add('hidden')
+        }
         let page2 = document.querySelector('#page2');
         page2.classList.remove('hidden');
         page2.classList.add('show');
         
-
-        let searchInput = document.querySelector("#searchInput").value;
-        console.log(searchInput);
         mapCenter = map.getBounds().getCenter();
+
         let response = await searchPlaces(
           mapCenter.lat,
           mapCenter.lng,
           searchInput
         );
 
+        // search results auto-dropdown for better UX
         document.querySelector('#dropdownButton').classList.add('show');
-    
         document.querySelector('#infoTabSearchResults').classList.add('show');
 
         console.log(response.results);
@@ -55,7 +66,6 @@ async function main() {
             eachResult.geocodes.main.latitude,
             eachResult.geocodes.main.longitude,
           ];
-          console.log(resultCoordinate);
 
           let resultIcon = L.icon({
             iconUrl: "icons/search.png",
@@ -63,8 +73,24 @@ async function main() {
           });
 
           let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
+
+          let resultPhoto = await searchPhoto(eachResult.fsq_id);
+          // console.log(resultPhoto);
+
+          let resultPhotoElement = null;
+          if (resultPhoto.length == 0){
+            continue
+          } else {
+            resultPhotoElement = document.createElement('img');
+            resultPhoto.forEach(result => {
+              resultPhotoElement.src = result.prefix + '150x150' + result.suffix
+              console.log(resultPhotoElement)
+            })
+          }
+
           resultMarker.bindPopup(`<div>
             <div>${eachResult.name}</div>
+            <div>${resultPhotoElement}</div>
             <button type="button" class="btn btn-primary">Directions</button>
             </div>`);
           resultMarker.addTo(searchLayer);
@@ -72,7 +98,6 @@ async function main() {
           let resultElement = document.createElement("li");
           resultElement.innerHTML = eachResult.name;
           resultElement.className = "resultList";
-          // document.querySelectorAll('.resultList').style.display = 'block';
 
           resultElement.addEventListener("click", function () {
             map.flyTo(resultCoordinate, 16);
@@ -85,19 +110,24 @@ async function main() {
 
           // setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
           searchResultElement.appendChild(resultElement);
+          // searchResultElement.appendChild(resultPhotoElement)
         }
         searchLayer.addTo(map);
+        }
       });
 
       let backBtn = document.querySelector('#backBtn');
       backBtn.addEventListener('click', function(){
+
+        let validation = document.querySelector('#searchValidation');
+        validation.innerHTML = '<br>'
+
+        //go back to landing page
         let allPages = document.querySelectorAll('.page');
-        
         for(let page of allPages){
           page.classList.remove('show');
           page.classList.add('hidden');
         }
-
         let page1 = document.querySelector('#page1');
         page2.classList.add('hidden');
         page1.classList.add('show');
@@ -151,7 +181,12 @@ async function main() {
         plotCoordinates(response.results, "icons/volleyball.svg");
       });
 
-
+      let cyclingBtn = document.querySelector('#cyclingBtn');
+      cyclingBtn.addEventListener('click', async function() {
+        resetMap();
+        showCyclingPath();
+        cyclingLayer.addTo(map);
+      }) 
     });
   }
 

@@ -20,6 +20,19 @@ async function searchPlaces(lat, lng, query) {
   return response.data;
 }
 
+async function searchPhoto(fsqid) {
+  let response = await axios.get(API_BASE_URL + "/places/"+ fsqid + "/photos", {
+    params: {
+      limit: 1,
+    },
+    headers: {
+      Accept: "application/json",
+      Authorization: API_KEY,
+    },
+  });
+  return response.data;
+}
+
 async function searchSport(lat, lng, sport) {
   let ll = lat + "," + lng;
   let response = await axios.get(API_BASE_URL + "/places/search", {
@@ -65,11 +78,34 @@ function plotCoordinates(response, iconUrl) {
   }
 }
 
+async function showCyclingPath() {
+  let response = await axios.get('cycling.geojson');
+  let showCyclingLayer = L.geoJson(response.data,{
+    "onEachFeature": function(feature, layer){
+      let tempDiv = document.createElement('div');
+      tempDiv.innerHTML = feature.properties.Description;
+      console.log(tempDiv)
+      let allTds = tempDiv.querySelectorAll('td');
+      let pathName = allTds[0].innerHTML;
+      layer.bindPopup(`<div>${pathName} Cycling Path</div>`)
+    }
+  }).addTo(cyclingLayer);
+  showCyclingLayer.setStyle({
+    color: '#F226EE',
+    opacity: 0.5,
+    weight: 5,
+  })
+  return showCyclingLayer;
+}
+
 function resetMap() {
   searchLayer.clearLayers();
   sportClusterLayer.clearLayers();
+  cyclingLayer.clearLayers();
   map.setView(singapore, 12);
 }
+
+
 
 // for (let eachResult of response.results) {
 //   let resultCoordinate = [
