@@ -1,7 +1,7 @@
 const API_BASE_URL = "https://api.foursquare.com/v3";
 const API_KEY = "fsq3KsDXbif0VEzzseynwf0eXjgsmZ+f+TTkTigq0LIpneY=";
 
-async function searchPlaces(lat, lng, query) {
+async function searchPlaces(lat, lng, query, limit) {
   let ll = lat + "," + lng;
   let response = await axios.get(API_BASE_URL + "/places/search", {
     params: {
@@ -10,7 +10,7 @@ async function searchPlaces(lat, lng, query) {
       query: query,
       radius: 12000,
       categories: 18000,
-      limit: 8,
+      limit: limit
     },
     headers: {
       Accept: "application/json",
@@ -56,9 +56,7 @@ async function searchSport(lat, lng, sport) {
 }
 
 async function plotSearchCoordinates(response, iconUrl) {
-  let searchResultElement = document.querySelector(
-    "#infoTabSearchResults"
-  );
+  let searchResultElement = document.querySelector("#infoTabSearchResults");
   for (let eachResult of response) {
     let resultCoordinate = [
       eachResult.geocodes.main.latitude,
@@ -75,12 +73,12 @@ async function plotSearchCoordinates(response, iconUrl) {
 
     let resultPhotoUrl = null;
 
-    if (resultPhoto.length == 0){
-      continue
+    if (resultPhoto.length == 0) {
+      continue;
     } else {
-      resultPhoto.forEach(result => {
-        resultPhotoUrl = result.prefix +'original' + result.suffix
-      })
+      resultPhoto.forEach((result) => {
+        resultPhotoUrl = result.prefix + "original" + result.suffix;
+      });
     }
 
     resultMarker.bindPopup(`<div>
@@ -107,9 +105,6 @@ async function plotSearchCoordinates(response, iconUrl) {
     // setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
     searchResultElement.appendChild(resultElement);
   }
-
-
-
 }
 
 async function plotSportsCoordinates(response, iconUrl) {
@@ -170,6 +165,18 @@ async function showCyclingPath() {
   return showCyclingLayer;
 }
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } 
+  // else{} ???????
+}
+
+function showPosition(position) {
+  userLocation = [position.coords.latitude, position.coords.longitude];
+  return userLocation;
+}
+
 function resetMap() {
   searchLayer.clearLayers();
   sportClusterLayer.clearLayers();
@@ -186,6 +193,17 @@ function showMapPage() {
   let page2 = document.querySelector("#page2");
   page2.classList.remove("hidden");
   page2.classList.add("show");
+}
+
+function showLandingPage() {
+  let allPages = document.querySelectorAll(".page");
+  for (let page of allPages) {
+    page.classList.remove("show");
+    page.classList.add("hidden");
+  }
+  let page1 = document.querySelector("#page1");
+  page2.classList.add("hidden");
+  page1.classList.add("show");
 }
 
 // for (let eachResult of response.results) {

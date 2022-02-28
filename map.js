@@ -3,6 +3,7 @@ let singapore;
 let lightMode;
 let darkMode;
 let mapCenter;
+let userLocation;
 let searchLayer = L.layerGroup();
 let cyclingLayer = L.layerGroup();
 let sportClusterLayer = L.markerClusterGroup();
@@ -14,10 +15,8 @@ async function main() {
     map = initMap();
 
     window.addEventListener("DOMContentLoaded", function () {
-
       let landingSearchBtn = document.querySelector("#landingSearchBtn");
       landingSearchBtn.addEventListener("click", async function () {
-        
         // search validation
         let emptySearch = false;
 
@@ -27,36 +26,37 @@ async function main() {
           emptySearch = true;
         }
 
-        if (emptySearch){
-          let validation = document.querySelector('#searchValidation');
-          validation.innerHTML = 'Please enter a valid search term'
+        if (emptySearch) {
+          let validation = document.querySelector("#searchValidation");
+          validation.innerHTML = "Please enter a valid search term";
         } else {
-        resetMap();
+          resetMap();
 
-        //go to map page
-        showMapPage();
-        
-        mapCenter = map.getBounds().getCenter();
+          //go to map page
+          showMapPage();
 
-        let response = await searchPlaces(
-          mapCenter.lat,
-          mapCenter.lng,
-          searchInput
-        );
+          mapCenter = map.getBounds().getCenter();
 
-        // search results auto-dropdown for better UX
-        document.querySelector('#dropdownButton').classList.add('show');
-        document.querySelector('#infoTabSearchResults').classList.add('show');
+          let response = await searchPlaces(
+            mapCenter.lat,
+            mapCenter.lng,
+            searchInput,
+            10
+          );
 
-        // console.log(response.results);
+          // search results auto-dropdown for better UX
+          document.querySelector("#dropdownButton").classList.add("show");
+          document.querySelector("#infoTabSearchResults").classList.add("show");
 
-        plotSearchCoordinates(response.results, "icons/search.png");
-        searchLayer.addTo(map);
+          // console.log(response.results);
+
+          plotSearchCoordinates(response.results, "icons/search.png");
+          searchLayer.addTo(map);
         }
       });
 
-      let mapSearchBtn = document.querySelector('#mapSearchBtn');
-      mapSearchBtn.addEventListener('click', async function(){
+      let mapSearchBtn = document.querySelector("#mapSearchBtn");
+      mapSearchBtn.addEventListener("click", async function () {
         // search validation
         let emptySearch = false;
 
@@ -66,54 +66,84 @@ async function main() {
           emptySearch = true;
         }
 
-        if (emptySearch){
-          let validation = document.querySelector('#searchValidation');
-          validation.innerHTML = 'Please enter a valid search term'
+        if (emptySearch) {
+          let validation = document.querySelector("#searchValidation");
+          validation.innerHTML = "Please enter a valid search term";
         } else {
-        resetMap();
+          resetMap();
 
-        mapCenter = map.getBounds().getCenter();
+          mapCenter = map.getBounds().getCenter();
 
-        let response = await searchPlaces(
-          mapCenter.lat,
-          mapCenter.lng,
-          searchInput
-        );
+          let response = await searchPlaces(
+            mapCenter.lat,
+            mapCenter.lng,
+            searchInput,
+            8
+          );
 
-        // search results auto-dropdown for better UX
-        document.querySelector('#dropdownButton').classList.add('show');
-        document.querySelector('#infoTabSearchResults').classList.add('show');
+          // search results auto-dropdown for better UX
+          document.querySelector("#dropdownButton").classList.add("show");
+          document.querySelector("#infoTabSearchResults").classList.add("show");
 
-        // console.log(response.results);
+          // console.log(response.results);
 
-        plotSearchCoordinates(response.results, "icons/search.png");
-        searchLayer.addTo(map);
-        
+          plotSearchCoordinates(response.results, "icons/search.png");
+          searchLayer.addTo(map);
+        }
+      });
 
+      let locationSearchBtn = document.querySelector("#locationSearchBtn");
+      locationSearchBtn.addEventListener("click", async function () {
+        // search validation
+        let emptySearch = false;
 
+        let searchInput = document.querySelector("#searchInput").value;
 
-
-
+        if (!searchInput) {
+          emptySearch = true;
         }
 
-      })
+        if (emptySearch) {
+          let validation = document.querySelector("#searchValidation");
+          validation.innerHTML = "Please enter a valid search term";
+        } else {
+          resetMap();
+          getLocation();
+          console.log(userLocation[0]);
 
-      let backBtn = document.querySelector('#backBtn');
-      backBtn.addEventListener('click', function(){
+          let response = await searchPlaces(
+            userLocation[0],
+            userLocation[1],
+            searchInput,
+            8
+          );
 
-        let validation = document.querySelector('#searchValidation');
-        validation.innerHTML = '<br>'
+          // search results auto-dropdown for better UX
+          document.querySelector("#dropdownButton").classList.add("show");
+          document.querySelector("#infoTabSearchResults").classList.add("show");
+
+          plotSearchCoordinates(response.results, "icons/search.png");
+          searchLayer.addTo(map);
+        }
+      });
+
+      let backBtn = document.querySelector("#backBtn");
+      backBtn.addEventListener("click", function () {
+        let validation = document.querySelector("#searchValidation");
+        validation.innerHTML = "<br>";
+
+        showLandingPage();
 
         //back to landing page
-        let allPages = document.querySelectorAll('.page');
-        for(let page of allPages){
-          page.classList.remove('show');
-          page.classList.add('hidden');
-        }
-        let page1 = document.querySelector('#page1');
-        page2.classList.add('hidden');
-        page1.classList.add('show');
-      })
+        // let allPages = document.querySelectorAll('.page');
+        // for(let page of allPages){
+        //   page.classList.remove('show');
+        //   page.classList.add('hidden');
+        // }
+        // let page1 = document.querySelector('#page1');
+        // page2.classList.add('hidden');
+        // page1.classList.add('show');
+      });
 
       let gymBtn = document.querySelector("#gymBtn");
       gymBtn.addEventListener("click", async function () {
@@ -127,7 +157,11 @@ async function main() {
       basketballBtn.addEventListener("click", async function () {
         resetMap();
         mapCenter = map.getBounds().getCenter();
-        let response = await searchSport(mapCenter.lat, mapCenter.lng, "basketball");
+        let response = await searchSport(
+          mapCenter.lat,
+          mapCenter.lng,
+          "basketball"
+        );
         plotSportsCoordinates(response.results, "icons/basketball.svg");
       });
 
@@ -143,7 +177,11 @@ async function main() {
       bowlingBtn.addEventListener("click", async function () {
         resetMap();
         mapCenter = map.getBounds().getCenter();
-        let response = await searchSport(mapCenter.lat, mapCenter.lng, "bowling");
+        let response = await searchSport(
+          mapCenter.lat,
+          mapCenter.lng,
+          "bowling"
+        );
         plotSportsCoordinates(response.results, "icons/bowling.svg");
       });
 
@@ -151,7 +189,11 @@ async function main() {
       swimmingBtn.addEventListener("click", async function () {
         resetMap();
         mapCenter = map.getBounds().getCenter();
-        let response = await searchSport(mapCenter.lat, mapCenter.lng, "swimming");
+        let response = await searchSport(
+          mapCenter.lat,
+          mapCenter.lng,
+          "swimming"
+        );
         plotSportsCoordinates(response.results, "icons/swimming.svg");
       });
 
@@ -159,16 +201,20 @@ async function main() {
       volleyballBtn.addEventListener("click", async function () {
         resetMap();
         mapCenter = map.getBounds().getCenter();
-        let response = await searchSport(mapCenter.lat, mapCenter.lng, "volleyball");
+        let response = await searchSport(
+          mapCenter.lat,
+          mapCenter.lng,
+          "volleyball"
+        );
         plotSportsCoordinates(response.results, "icons/volleyball.svg");
       });
 
-      let cyclingBtn = document.querySelector('#cyclingBtn');
-      cyclingBtn.addEventListener('click', async function() {
+      let cyclingBtn = document.querySelector("#cyclingBtn");
+      cyclingBtn.addEventListener("click", async function () {
         resetMap();
         showCyclingPath();
         cyclingLayer.addTo(map);
-      }) 
+      });
     });
   }
 

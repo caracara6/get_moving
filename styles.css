@@ -80,18 +80,18 @@ body {
   z-index: 314159;
 }
 
-/* #dropdownResults {
-    overflow-y: auto;
-} */
-/* @media screen and (min-width: 769px) {
-    #landingPage{
-        position: relative;
-    }
-    #searchWrapper{
-        position: absolute;
-        top: 0.4;
-        right: 0.4;
-    }
-} */
+
+@media screen and (min-width: 769px) {
+  #infoTab{
+    font-size: 1.5rem;
+  }
+  .sportsIcon{
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+  .resultList{
+    font-size: 1.25rem;
+  }
+}
 
 /* overflow-y: auto */
