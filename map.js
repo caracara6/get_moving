@@ -15,8 +15,8 @@ async function main() {
 
     window.addEventListener("DOMContentLoaded", function () {
 
-      let searchBtn = document.querySelector("#searchBtn");
-      searchBtn.addEventListener("click", async function () {
+      let landingSearchBtn = document.querySelector("#landingSearchBtn");
+      landingSearchBtn.addEventListener("click", async function () {
         
         // search validation
         let emptySearch = false;
@@ -34,14 +34,7 @@ async function main() {
         resetMap();
 
         //go to map page
-        let allPages = document.querySelectorAll('.page');
-        for(let page of allPages){
-          page.classList.remove('show');
-          page.classList.add('hidden')
-        }
-        let page2 = document.querySelector('#page2');
-        page2.classList.remove('hidden');
-        page2.classList.add('show');
+        showMapPage();
         
         mapCenter = map.getBounds().getCenter();
 
@@ -55,66 +48,55 @@ async function main() {
         document.querySelector('#dropdownButton').classList.add('show');
         document.querySelector('#infoTabSearchResults').classList.add('show');
 
-        console.log(response.results);
+        // console.log(response.results);
 
-        let searchResultElement = document.querySelector(
-          "#infoTabSearchResults"
-        );
-
-        for (let eachResult of response.results) {
-          let resultCoordinate = [
-            eachResult.geocodes.main.latitude,
-            eachResult.geocodes.main.longitude,
-          ];
-
-          let resultIcon = L.icon({
-            iconUrl: "icons/search.png",
-            iconSize: [35, 35],
-          });
-
-          let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
-
-          let resultPhoto = await searchPhoto(eachResult.fsq_id);
-          // console.log(resultPhoto);
-
-          let resultPhotoElement = null;
-          if (resultPhoto.length == 0){
-            continue
-          } else {
-            resultPhotoElement = document.createElement('img');
-            resultPhoto.forEach(result => {
-              resultPhotoElement.src = result.prefix + '150x150' + result.suffix
-              console.log(resultPhotoElement)
-            })
-          }
-
-          resultMarker.bindPopup(`<div>
-            <div>${eachResult.name}</div>
-            <div>${resultPhotoElement}</div>
-            <button type="button" class="btn btn-primary">Directions</button>
-            </div>`);
-          resultMarker.addTo(searchLayer);
-
-          let resultElement = document.createElement("li");
-          resultElement.innerHTML = eachResult.name;
-          resultElement.className = "resultList";
-
-          resultElement.addEventListener("click", function () {
-            map.flyTo(resultCoordinate, 16);
-            resultMarker.openPopup();
-          });
-          resultMarker.addEventListener("click", function () {
-            map.flyTo(resultCoordinate, 16);
-            resultMarker.openPopup();
-          });
-
-          // setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
-          searchResultElement.appendChild(resultElement);
-          // searchResultElement.appendChild(resultPhotoElement)
-        }
+        plotSearchCoordinates(response.results, "icons/search.png");
         searchLayer.addTo(map);
         }
       });
+
+      let mapSearchBtn = document.querySelector('#mapSearchBtn');
+      mapSearchBtn.addEventListener('click', async function(){
+        // search validation
+        let emptySearch = false;
+
+        let searchInput = document.querySelector("#searchInput").value;
+
+        if (!searchInput) {
+          emptySearch = true;
+        }
+
+        if (emptySearch){
+          let validation = document.querySelector('#searchValidation');
+          validation.innerHTML = 'Please enter a valid search term'
+        } else {
+        resetMap();
+
+        mapCenter = map.getBounds().getCenter();
+
+        let response = await searchPlaces(
+          mapCenter.lat,
+          mapCenter.lng,
+          searchInput
+        );
+
+        // search results auto-dropdown for better UX
+        document.querySelector('#dropdownButton').classList.add('show');
+        document.querySelector('#infoTabSearchResults').classList.add('show');
+
+        // console.log(response.results);
+
+        plotSearchCoordinates(response.results, "icons/search.png");
+        searchLayer.addTo(map);
+        
+
+
+
+
+
+        }
+
+      })
 
       let backBtn = document.querySelector('#backBtn');
       backBtn.addEventListener('click', function(){
@@ -122,7 +104,7 @@ async function main() {
         let validation = document.querySelector('#searchValidation');
         validation.innerHTML = '<br>'
 
-        //go back to landing page
+        //back to landing page
         let allPages = document.querySelectorAll('.page');
         for(let page of allPages){
           page.classList.remove('show');
@@ -138,7 +120,7 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "gym");
-        plotCoordinates(response.results, "icons/dumbbell.svg");
+        plotSportsCoordinates(response.results, "icons/dumbbell.svg");
       });
 
       let basketballBtn = document.querySelector("#basketballBtn");
@@ -146,7 +128,7 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "basketball");
-        plotCoordinates(response.results, "icons/basketball.svg");
+        plotSportsCoordinates(response.results, "icons/basketball.svg");
       });
 
       let golfBtn = document.querySelector("#golfBtn");
@@ -154,7 +136,7 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "golf");
-        plotCoordinates(response.results, "icons/golf.svg");
+        plotSportsCoordinates(response.results, "icons/golf.svg");
       });
 
       let bowlingBtn = document.querySelector("#bowlingBtn");
@@ -162,7 +144,7 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "bowling");
-        plotCoordinates(response.results, "icons/bowling.svg");
+        plotSportsCoordinates(response.results, "icons/bowling.svg");
       });
 
       let swimmingBtn = document.querySelector("#swimmingBtn");
@@ -170,7 +152,7 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "swimming");
-        plotCoordinates(response.results, "icons/swimming.svg");
+        plotSportsCoordinates(response.results, "icons/swimming.svg");
       });
 
       let volleyballBtn = document.querySelector("#volleyballBtn");
@@ -178,7 +160,7 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "volleyball");
-        plotCoordinates(response.results, "icons/volleyball.svg");
+        plotSportsCoordinates(response.results, "icons/volleyball.svg");
       });
 
       let cyclingBtn = document.querySelector('#cyclingBtn');

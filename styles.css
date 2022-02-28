@@ -1,71 +1,84 @@
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; 
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 #singaporeMap {
-    height:100vh;
+  height: 100vh;
 }
 
 #allPages {
-    position: relative;
+  position: relative;
 }
 
 .page {
-    position: absolute;
-    box-sizing: border-box; 
-    width: 100%;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .hidden {
-    transform: translateY(-100%);
-    transition: transform 1s;
+  transform: translateY(-100%);
+  transition: transform 1s;
 }
 
-.show{
-    transform: translateX(0);
-    transition: transform 1s;
+.show {
+  transform: translateX(0);
+  transition: transform 1s;
 }
 
 #landingPage {
-    height: 100vh;
-    background-image: url('images/swimming.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+  height: 100vh;
+  background-image: url("images/swimming.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 #mapPage {
-    position: relative;
-    padding-right: 0px!important;
-    padding-left: 0px!important;
+  position: relative;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
 }
 
 #infoTab {
-    position: absolute;
-    top: 0.9rem;
-    right: 2rem;
-    z-index: 314159; 
-    background-color:rgba(255,255,255,0.7);
-    font-size: 1rem;
-
+  position: absolute;
+  top: 0.9rem;
+  right: 2rem;
+  z-index: 314159;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
 }
 
 #infoTabSearchResults {
-    position: absolute;
-    inset: 0px auto auto 0px;
-    margin: 0px;
-    transform: translate3d(-57px, 42px, 0px);
+  position: absolute;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: translate3d(-57px, 42px, 0px);
 }
 .resultList {
-    padding: 0.25rem 0.6rem;
-    font-size: 0.75rem;
-    box-sizing: border-box; 
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  box-sizing: border-box;
 }
 
+.popupPhoto{
+    width: 80%;
+    margin: auto;
+}
+#mapSearchBar {
+  position: absolute;
+  bottom: 0.9rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 18rem;
+  z-index: 314159;
+}
 
 /* #dropdownResults {
     overflow-y: auto;
@@ -80,7 +93,5 @@ body {
         right: 0.4;
     }
 } */
-
-
 
 /* overflow-y: auto */
