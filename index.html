@@ -54,12 +54,67 @@
                 aria-describedby="emailHelp"
                 placeholder="What's your favourite sport?"
               />
-              <div id="searchValidation" class="form-text ms-1"><br></div>
+              <div id="searchValidation" class="form-text ms-1"><br /></div>
             </div>
             <div class="d-flex justify-content-center">
-              <button type="submit" id="landingSearchBtn" class="btn btn-primary">
+              <button
+                type="submit"
+                id="landingSearchBtn"
+                class="btn btn-primary"
+              >
                 Submit
               </button>
+
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                id="randomSportBtn"
+                class="btn btn-primary ms-3"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Surprise me
+              </button>
+
+              <!-- modal starts-->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Why don't you try...
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <h6 id="randomSport"></h6>
+                      <div><img id="randomSportImage" src="" alt="" /></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        id="letsGoBtn"
+                        data-bs-dismiss="modal"
+                      >
+                        Let's Go
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- modal ends -->
             </div>
           </div>
         </section>
@@ -83,10 +138,7 @@
               ></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i 
-              class="fa-solid fa-dumbbell fa-bounce my-3" 
-              id="gymBtn"
-              ></i>
+              <i class="fa-solid fa-dumbbell fa-bounce my-3" id="gymBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
               <i
@@ -119,9 +171,9 @@
               ></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i 
-              class="fa-solid fa-person-biking fa-bounce my-3"
-              id="cyclingBtn"
+              <i
+                class="fa-solid fa-person-biking fa-bounce my-3"
+                id="cyclingBtn"
               ></i>
             </li>
 
@@ -146,7 +198,13 @@
 
           <!-- map search starts -->
           <div class="input-group rounded" id="mapSearchBar">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="search-addon"
+            />
             <span class="input-group-text border-0" id="mapSearchBtn">
               <i class="fas fa-search"></i>
             </span>
@@ -178,6 +236,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="load_data.js"></script>
+    <script src="random.js"></script>
     <script src="map.js"></script>
   </body>
 </html>

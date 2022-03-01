@@ -2,6 +2,7 @@ let map;
 let singapore;
 let lightMode;
 let darkMode;
+let randNum;
 let mapCenter;
 let userLocation;
 let searchLayer = L.layerGroup();
@@ -32,7 +33,6 @@ async function main() {
         } else {
           resetMap();
 
-          //go to map page
           showMapPage();
 
           mapCenter = map.getBounds().getCenter();
@@ -133,16 +133,6 @@ async function main() {
         validation.innerHTML = "<br>";
 
         showLandingPage();
-
-        //back to landing page
-        // let allPages = document.querySelectorAll('.page');
-        // for(let page of allPages){
-        //   page.classList.remove('show');
-        //   page.classList.add('hidden');
-        // }
-        // let page1 = document.querySelector('#page1');
-        // page2.classList.add('hidden');
-        // page1.classList.add('show');
       });
 
       let gymBtn = document.querySelector("#gymBtn");
@@ -215,6 +205,27 @@ async function main() {
         showCyclingPath();
         cyclingLayer.addTo(map);
       });
+
+      let randomSportGlobal
+
+      let randomSportBtn = document.querySelector('#randomSportBtn');
+      randomSportBtn.addEventListener('click', function() {
+        randomSportGlobal= generateRandomSport();
+        // randomSport = 
+      })
+
+      let letsGoBtn = document.querySelector('#letsGoBtn');
+      letsGoBtn.addEventListener('click', function() {
+        resetMap();
+        showMapPage();
+
+        // let searchInput = 
+
+        // call and pass pilates
+
+
+      })
+
     });
   }
 

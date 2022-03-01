@@ -30,6 +30,10 @@ body {
   transition: transform 1s;
 }
 
+#randomSportImage {
+  width: 100%;
+}
+
 #landingPage {
   height: 100vh;
   background-image: url("images/swimming.jpg");
