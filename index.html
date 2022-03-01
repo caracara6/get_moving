@@ -68,7 +68,7 @@
               <!-- Button trigger modal -->
               <button
                 type="button"
-                id="randomSportBtn"
+                id="surpriseMeBtn"
                 class="btn btn-primary ms-3"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
@@ -122,14 +122,14 @@
       </div>
       <!-- landing page ends -->
 
-      <!-- map page  starts -->
+      <!-- map page starts -->
       <div id="page2" class="page hidden">
         <section class="container-fluid" id="mapPage">
           <!-- map starts -->
           <div id="singaporeMap"></div>
           <!-- map ends -->
 
-          <!-- result bar starts -->
+          <!-- nav bar starts -->
           <ul class="nav nav-pills rounded shadow" id="infoTab">
             <li class="nav-item sportsIcon mx-1">
               <i
@@ -194,12 +194,13 @@
               ></ul>
             </li>
           </ul>
-          <!-- results bar ends -->
+          <!-- nav bar ends -->
 
           <!-- map search starts -->
           <div class="input-group rounded" id="mapSearchBar">
             <input
               type="search"
+              id="mapSearchInput"
               class="form-control"
               placeholder="Search"
               aria-label="Search"
@@ -213,9 +214,20 @@
             </span>
           </div>
           <!-- map search ends -->
+          <div id="buddy-icon">
+            <img src="icons/high-five.png" alt="">
+          </div>
         </section>
       </div>
       <!-- map page ends -->
+
+      <!-- form page starts -->
+      <div id="page3" class="page hidden">
+        <section class="container-fluid ht-100vh" id="buddy-page">
+
+        </section>
+      </div>
+      <!-- form page ends -->
     </div>
 
     <script

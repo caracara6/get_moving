@@ -60,7 +60,7 @@ async function main() {
         // search validation
         let emptySearch = false;
 
-        let searchInput = document.querySelector("#searchInput").value;
+        let searchInput = document.querySelector("#mapSearchInput").value;
 
         if (!searchInput) {
           emptySearch = true;
@@ -97,7 +97,7 @@ async function main() {
         // search validation
         let emptySearch = false;
 
-        let searchInput = document.querySelector("#searchInput").value;
+        let searchInput = document.querySelector("#mapSearchInput").value;
 
         if (!searchInput) {
           emptySearch = true;
@@ -110,6 +110,7 @@ async function main() {
           resetMap();
           getLocation();
           console.log(userLocation[0]);
+          console.log(searchInput)
 
           let response = await searchPlaces(
             userLocation[0],
@@ -206,23 +207,35 @@ async function main() {
         cyclingLayer.addTo(map);
       });
 
-      let randomSportGlobal
+      let randomSportSearch;
 
-      let randomSportBtn = document.querySelector('#randomSportBtn');
-      randomSportBtn.addEventListener('click', function() {
-        randomSportGlobal= generateRandomSport();
-        // randomSport = 
+      let surpriseMeBtn = document.querySelector('#surpriseMeBtn');
+      surpriseMeBtn.addEventListener('click', function() {
+        // generateRandomSport();
+        randomSportSearch = generateRandomSport();
+        // console.log(randomSportSearch)
       })
 
       let letsGoBtn = document.querySelector('#letsGoBtn');
-      letsGoBtn.addEventListener('click', function() {
+      letsGoBtn.addEventListener('click', async function() {
         resetMap();
         showMapPage();
 
-        // let searchInput = 
+        mapCenter = map.getBounds().getCenter();
 
-        // call and pass pilates
+        let response = await searchPlaces(
+          mapCenter.lat,
+          mapCenter.lng,
+          randomSportSearch,
+          8
+        );
 
+        // search results auto-dropdown for better UX
+        document.querySelector("#dropdownButton").classList.add("show");
+        document.querySelector("#infoTabSearchResults").classList.add("show");
+
+        plotSearchCoordinates(response.results, "icons/search.png");
+        searchLayer.addTo(map);
 
       })
 

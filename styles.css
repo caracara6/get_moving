@@ -10,6 +10,10 @@ body {
   height: 100vh;
 }
 
+.ht-100vh{
+  height:100vh
+}
+
 #allPages {
   position: relative;
 }
@@ -63,6 +67,7 @@ body {
   margin: 0px;
   transform: translate3d(-57px, 42px, 0px);
 }
+
 .resultList {
   padding: 0.25rem 0.6rem;
   font-size: 0.75rem;
@@ -70,9 +75,10 @@ body {
 }
 
 .popupPhoto{
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
 }
+
 #mapSearchBar {
   position: absolute;
   bottom: 0.9rem;
@@ -84,6 +90,21 @@ body {
   z-index: 314159;
 }
 
+#buddy-page{
+  background: rgba(0, 0, 0, 0.5)
+}
+
+#buddy-icon {
+  position: absolute;
+  bottom: 5rem;
+  left: 2rem;
+  z-index: 314159;
+}
+
+#buddy-icon>img{
+  width: 3rem;
+  height: 3rem;
+}
 
 @media screen and (min-width: 769px) {
   #infoTab{
@@ -95,6 +116,19 @@ body {
   }
   .resultList{
     font-size: 1.25rem;
+  }
+  #mapSearchBar{
+    left: 50px;
+    right: unset;
+    top: 15px;
+    bottom: unset;
+  }
+  #buddy-icon{
+    bottom: 3rem
+  }
+  #buddy-icon>img{
+    width: 4.5rem;
+    height: 4.5rem
   }
 }
 

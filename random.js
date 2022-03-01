@@ -68,6 +68,6 @@ function generateRandomSport() {
     randomSportImage.src = `${randomSportArray[randNum].randomSportImage}`;
     randomSportImage.alt = `${randomSportArray[randNum].sport} photo`
 
-    return randomSport
+    return randomSportArray[randNum].sport
 }
 
