@@ -262,9 +262,28 @@ async function main() {
         document.querySelector('#tNcCheckbox').disabled = false;
       })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
       let submitBtn = document.querySelector('#submitBtn');
       submitBtn.addEventListener('click', function() {
-        // name validation
+        // name error
         let name = document.getElementById('name').value;
         let nameNotProvided = false;
         let nameTooShort = false;
@@ -284,7 +303,7 @@ async function main() {
           }
         }
 
-        // age validation
+        // age error
         let dob = new Date(document.getElementById('dob').value);
 
         let today = new Date();
@@ -310,7 +329,7 @@ async function main() {
           document.getElementById('ageValidation').innerHTML = "You have to be older than 18"
         }
 
-        // gender validation
+        // gender error
         let gender = null;
         for (let eachGender of document.querySelectorAll('.gender')){
           if(eachGender.checked == true){
@@ -323,12 +342,31 @@ async function main() {
           document.getElementById('validationGender').innerHTML = 'Please select your gender'
         }
 
-        //email validation
+        //email error
         let email = document.getElementById('email').value;
         validateEmail(email);
 
-        //terms and conditions validation
-        
+        //activities error
+        let allActivities = document.getElementsByClassName('.activity');
+        let selectedActivities = [];
+        for (let activity of allActivities) {
+          if (activity.checked == true) {
+            selectedActivities.push(activity.value);
+          }
+        }
+        ////////work on this!!!!
+        if (selectedActivities.length==0){
+          document.querySelector('#activityValidation').innerHTML = `Please choose at least one activity`
+        }
+
+        let otherActivity = document.querySelector('#othersSpecific').value;
+        if(!otherActivity){
+          document.querySelector('#activityValidation').innerHTML = 'Please let us know what activity you prefer'
+        }
+
+
+
+        //terms and conditions error
         let tNcCheckbox = document.querySelector('#tNcCheckbox');
         if(tNcCheckbox.checked == false){
           document.querySelector('#tNcValidation').innerHTML = 'Please agree to the terms and conditions'
