@@ -110,7 +110,7 @@ async function main() {
           resetMap();
           getLocation();
           console.log(userLocation[0]);
-          console.log(searchInput)
+          console.log(searchInput);
 
           let response = await searchPlaces(
             userLocation[0],
@@ -209,15 +209,15 @@ async function main() {
 
       let randomSportSearch;
 
-      let surpriseMeBtn = document.querySelector('#surpriseMeBtn');
-      surpriseMeBtn.addEventListener('click', function() {
+      let surpriseMeBtn = document.querySelector("#surpriseMeBtn");
+      surpriseMeBtn.addEventListener("click", function () {
         // generateRandomSport();
         randomSportSearch = generateRandomSport();
         // console.log(randomSportSearch)
-      })
+      });
 
-      let letsGoBtn = document.querySelector('#letsGoBtn');
-      letsGoBtn.addEventListener('click', async function() {
+      let letsGoBtn = document.querySelector("#letsGoBtn");
+      letsGoBtn.addEventListener("click", async function () {
         resetMap();
         showMapPage();
 
@@ -236,9 +236,123 @@ async function main() {
 
         plotSearchCoordinates(response.results, "icons/search.png");
         searchLayer.addTo(map);
+      });
+
+      let buddyBtn = document.querySelector("#buddyBtn");
+      buddyBtn.addEventListener("click", function () {
+        showBuddyForm();
+      });
+
+      let othersCheckbox = document.getElementById('othersCheckbox');
+      othersCheckbox.addEventListener('click', function() {
+        if (othersCheckbox.checked == true){
+          document.getElementById('othersSpecific').style.display = 'block'
+        } else {
+          document.getElementById('othersSpecific').style.display = 'none'
+        }
+      
+        
+
+        // alert('hello')
+        // document.getElementById('othersSpecific').style.display = 'block'
+      })
+
+      let agreetNc = document.querySelector('#agreetNc');
+      agreetNc.addEventListener('click', function(){
+        document.querySelector('#tNcCheckbox').disabled = false;
+      })
+
+      let submitBtn = document.querySelector('#submitBtn');
+      submitBtn.addEventListener('click', function() {
+        // name validation
+        let name = document.getElementById('name').value;
+        let nameNotProvided = false;
+        let nameTooShort = false;
+
+        if (!name){
+          nameNotProvided = true;
+        } else if(name.length<3){
+          nameTooShort = true;
+        }
+
+        if(nameNotProvided || nameTooShort){
+          if(nameNotProvided){
+            document.getElementById('nameValidation').innerHTML = 'Please enter your name'
+          }
+          if(nameTooShort){
+            document.getElementById('nameValidation').innerHTML = 'Please nter a valid name'
+          }
+        }
+
+        // age validation
+        let dob = new Date(document.getElementById('dob').value);
+
+        let today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth();
+        let currentDay = today.getDate();
+
+        let birthYear = dob.getFullYear();
+        let birthMonth = dob.getMonth();
+        let birthDay = dob.getDate();
+
+        let age = currentYear - birthYear;
+        let ageMonth = currentMonth - birthMonth;
+        let ageDay = currentDay - birthDay;
+
+        if(!age){
+          document.getElementById('ageValidation').innerHTML = "Please enter your age"
+        }
+        if(age > 100){
+          document.getElementById('ageValidation').innerHTML = 'Please enter an age below 100 years old'
+        }
+        if((age == 18 && ageMonth <= 0 && ageDay <= 0) || age < 18){
+          document.getElementById('ageValidation').innerHTML = "You have to be older than 18"
+        }
+
+        // gender validation
+        let gender = null;
+        for (let eachGender of document.querySelectorAll('.gender')){
+          if(eachGender.checked == true){
+            gender = eachGender.value;
+            document.getElementById('validationGender').innerHTML = ''
+            break;
+          } 
+        }
+        if(gender == null){
+          document.getElementById('validationGender').innerHTML = 'Please select your gender'
+        }
+
+        //email validation
+        let email = document.getElementById('email').value;
+        validateEmail(email);
+
+        //terms and conditions validation
+        
+        let tNcCheckbox = document.querySelector('#tNcCheckbox');
+        if(tNcCheckbox.checked == false){
+          document.querySelector('#tNcValidation').innerHTML = 'Please agree to the terms and conditions'
+        }
+        
+
+        console.log(name, dob, email, gender)
+
+        //submit response
+
+
 
       })
 
+
+
+
+
+
+
+
+
+
+      
     });
   }
 

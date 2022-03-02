@@ -10,7 +10,7 @@ async function searchPlaces(lat, lng, query, limit) {
       query: query,
       radius: 12000,
       categories: 18000,
-      limit: limit
+      limit: limit,
     },
     headers: {
       Accept: "application/json",
@@ -168,7 +168,7 @@ async function showCyclingPath() {
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(showPosition);
-  } 
+  }
   // else{} ???????
 }
 
@@ -204,6 +204,28 @@ function showLandingPage() {
   let page1 = document.querySelector("#page1");
   page2.classList.add("hidden");
   page1.classList.add("show");
+}
+
+function showBuddyForm() {
+  document.querySelector("#page3").classList.remove("hidden");
+  document.querySelector("#page3").classList.add("show");
+}
+
+function closeBuddyForm() {
+  document.querySelector("#page3").classList.add("hidden");
+}
+
+function validateEmail(email) {
+  
+  let validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (email.match(validEmail)) {
+    document.querySelector("#emailValidation").innerHTML = "";
+    return true;
+  } else {
+    document.querySelector("#emailValidation").innerHTML =
+      "Please enter a valid email";
+    return false;
+  }
 }
 
 // for (let eachResult of response.results) {

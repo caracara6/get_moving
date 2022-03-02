@@ -65,7 +65,7 @@
                 Submit
               </button>
 
-              <!-- Button trigger modal -->
+              <!-- Button trigger surprise modal -->
               <button
                 type="button"
                 id="surpriseMeBtn"
@@ -76,7 +76,7 @@
                 Surprise me
               </button>
 
-              <!-- modal starts-->
+              <!-- surprise modal starts-->
               <div
                 class="modal fade"
                 id="exampleModal"
@@ -114,7 +114,7 @@
                   </div>
                 </div>
               </div>
-              <!-- modal ends -->
+              <!-- surprise modal ends -->
             </div>
           </div>
         </section>
@@ -215,7 +215,11 @@
           </div>
           <!-- map search ends -->
           <div id="buddy-icon">
-            <img src="icons/high-five.png" alt="">
+            <img
+              id="buddyBtn"
+              src="icons/high-five.png"
+              alt="find-sports-buddy"
+            />
           </div>
         </section>
       </div>
@@ -224,11 +228,217 @@
       <!-- form page starts -->
       <div id="page3" class="page hidden">
         <section class="container-fluid ht-100vh" id="buddy-page">
+          <div class="row">
+            <div class="col-3 d-none d-lg-block"></div>
+            <header class="col p-5">
+              <h1>Find a workout buddy</h1>
+            </header>
+            <div class="col-3 d-none d-lg-block"></div>
+          </div>
 
+          <div class="row border border-danger gx-2">
+            <div class="col-3 d-none d-lg-block"></div>
+            <div class="col p-2 border border-info border-3">
+              <div id="form">
+                <div class="row mb-3">
+                  <label class="col-2" for="name">Name:</label>
+                  <div id="nameWrapper" class="col">
+                    <input
+                      type="text"
+                      required
+                      class="col form-control"
+                      name="name"
+                      id="name"
+                    />
+                    <div id="nameValidation"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2">Date of Birth:</label>
+                  <div id="emailWrapper" class="col">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="dob"
+                      name="dob"
+                    />
+                    <div id="ageValidation"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2">Gender</label>
+                  <div class="col">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input gender"
+                        type="radio"
+                        name="gender"
+                        id="male-gender"
+                        value="male"
+                      />
+                      <label class="form-check-label" for="male-gender"
+                        >Male</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input gender"
+                        type="radio"
+                        name="gender"
+                        id="female-gender"
+                        value="female"
+                      />
+                      <label class="form-check-label" for="female-gender"
+                        >Female</label
+                      >
+                    </div>
+                    <div id="validationGender"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2">Email:</label>
+                  <div id="emailWrapper" class="col">
+                    <input
+                      type="text"
+                      required
+                      class="form-control"
+                      name="email"
+                      id="email"
+                    />
+                    <div id="emailValidation"></div>
+                  </div>
+                </div>
+                <div class="row border border-danger mb-3">
+                  <label class="col-2">Activity:</label>
+                  <div class="col">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Badminton"
+                      />
+                      <label class="form-check-label" for="Badminton"
+                        >Badminton</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Basketball"
+                      />
+                      <label class="form-check-label" for="Basketball"
+                        >Basketball</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Tennis"
+                      />
+                      <label class="form-check-label" for="Tennis"
+                        >Tennis</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="Soccer"
+                      />
+                      <label class="form-check-label" for="Soccer"
+                        >Soccer</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        id="othersCheckbox"
+                        type="checkbox"
+                        value="Others"
+                      />
+                      <label class="form-check-label" for="Others"
+                        >Others</label
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="row mb-3"
+                    id="othersSpecific"
+                    style="display: none"
+                  >
+                    <label class="col-2">Please elaborate:</label>
+                    <input
+                      type="text"
+                      class="col form-control"
+                      name="othersSpecific"
+                    />
+                  </div>
+                </div>
+
+
+
+
+                <div class="row mb-3">
+                  <div class="col-2"></div>
+                  <div id="tNcWrapper" class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="tNcCheckbox" disabled>
+                      <label class="form-check-label" for="tNcCheckbox">
+                        <!-- tNc Modal trigger -->
+                        I agree to the <a href="" data-bs-toggle="modal" data-bs-target="#tNcModal">terms and conditions.</a>
+           
+                      </label>
+                    </div>
+                    <div id="tNcValidation"></div>
+                  </div>
+                </div>
+
+
+
+
+
+                
+
+                <input
+                  type="submit"
+                  class="btn btn-primary mt-3"
+                  id="submitBtn"
+                />
+              </div>
+            </div>
+            <div class="col-3 d-none d-lg-block"></div>
+          </div>
         </section>
       </div>
       <!-- form page ends -->
     </div>
+
+
+
+                    <!-- tNc Modal -->
+<div class="modal fade" id="tNcModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        blah blah
+      </div>
+      <div class="modal-footer">
+        <button type="button" id='agreetNc' class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
