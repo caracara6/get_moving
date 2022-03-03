@@ -298,13 +298,10 @@ async function main() {
       let othersCheckbox = document.getElementById("othersCheckbox");
       othersCheckbox.addEventListener("click", function () {
         if (othersCheckbox.checked == true) {
-          document.getElementById("othersSpecific").style.display = "block";
+          document.getElementById("whatOthers").style.display = "block";
         } else {
-          document.getElementById("othersSpecific").style.display = "none";
+          document.getElementById("whatOthers").style.display = "none";
         }
-
-        // alert('hello')
-        // document.getElementById('othersSpecific').style.display = 'block'
       });
 
       let agreetNc = document.querySelector("#agreetNc");
@@ -332,7 +329,7 @@ async function main() {
           }
           if (nameTooShort) {
             document.getElementById("nameValidation").innerHTML =
-              "Please nter a valid name";
+              "Please enter a valid name";
           }
         }
 
@@ -398,8 +395,11 @@ async function main() {
           ).innerHTML = `Please choose at least one activity`;
         }
 
-        let otherActivity = document.querySelector("#othersSpecific").value;
-        if (!otherActivity) {
+
+
+
+        let whatOthers = document.querySelector("#whatOthers").value;
+        if (!whatOthers) {
           document.querySelector("#activityValidation").innerHTML =
             "Please let us know what activity you prefer";
         }
@@ -427,14 +427,24 @@ async function main() {
       clearErrorMessage('#male-gender', 'click', '#genderValidation');
       clearErrorMessage('#female-gender', 'click', '#genderValidation');
       clearErrorMessage('#email', 'keydown', '#emailValidation');
-      let allActivities = document.querySelectorAll(".activity");
-      // allActivities.pop();
-      console.log(allActivities)
-      for(activity of allActivities){
-        // clearErrorMessage('#'+)
-        clearErrorMessage('#'+ activity.id, 'click', '#activityValidation');
+      let allActivitiesCheckboxes = document.getElementsByClassName("activity");
+      let activitiesArray = Array.from(allActivitiesCheckboxes);
+      activitiesArray.pop();
+      let activitiesIDs = activitiesArray.map(function(activity){
+        return activity.id
+      })
+      for(ID of activitiesIDs){
+        clearErrorMessage('#'+ ID, 'click', '#activityValidation');
       }
+      // if(document.getElementById('others').checked == true){
+      //   clearErrorMessage('#whatOthers', 'keydown', '#activityValidation')
+      // }
 
+      document.querySelector("#tNcCheckbox").addEventListener('click', function(){
+        if(document.querySelector("#tNcCheckbox").checked == true){
+          document.querySelector('#tNcValidation').innerHTML='<br>'
+        }
+      })
 
 
 
