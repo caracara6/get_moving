@@ -55,6 +55,14 @@ async function searchSport(lat, lng, sport) {
   return response.data;
 }
 
+
+
+
+
+
+
+
+
 async function plotSearchCoordinates(response, iconUrl) {
   let searchResultElement = document.querySelector("#infoTabSearchResults");
   for (let eachResult of response) {
@@ -84,8 +92,7 @@ async function plotSearchCoordinates(response, iconUrl) {
     resultMarker.bindPopup(`<div>
       <div>${eachResult.name}</div>
       <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
-      <button type="button" class="btn btn-primary">Directions</button>
-      </div>`);
+            </div>`);
 
     resultMarker.addTo(searchLayer);
 

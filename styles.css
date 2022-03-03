@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 #singaporeMap {
@@ -50,8 +51,9 @@ body {
 }
 
 #mapSearchInput:focus, #searchInput:focus{
-  background-color:rgba(255,0,0,0.5) !important;
+  background-color:rgba(255, 0, 170, 0.281) !important;
   color: white;
+  font-weight: 900;
 }
 #locationSearchBtn:hover, #mapSearchBtn:hover{
   background-color:rgba(255,0,0,0.5) !important;
@@ -61,12 +63,27 @@ body {
 
 
 
+button{
+  background-color:rgba(0, 0, 0, 0);
+  border-style: solid;
+  border-color: rgba(255, 0, 170, 0.281)!important;
+  font-weight: 500;
+  color: white!important;
+  border-width: 2px!important;
+  
+
+}
+button:hover{
+  background-color:rgba(255, 0, 170, 0.281);
+  color: white;
+  
+}
 
 
-
+/* 
 button:hover, {
   background-color:rgba(255,0,0,0.5) !important;
-}
+} */
 
 #randomSportImage {
   width: 100%;
@@ -164,6 +181,16 @@ button:hover, {
 .filter-white{
   filter: invert(100%) sepia(1%) saturate(677%) hue-rotate(268deg) brightness(122%) contrast(100%);
 }
+
+/* target all svg icons when in dark mode to invert to white */
+.dark-mode .leaflet-marker-pane img {
+  filter: invert(100%) sepia(1%) saturate(677%) hue-rotate(268deg) brightness(122%) contrast(100%);
+}
+
+.light-mode .leaflet-marker-pane img {
+  filter: invert(0%) sepia(1%) saturate(4690%) hue-rotate(115deg) brightness(79%) contrast(100%);
+}
+
 
 .pale-red-bg{
   background-color: rgba(250, 52, 52, 0.445)

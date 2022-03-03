@@ -16,30 +16,41 @@ async function main() {
     map = initMap();
 
     window.addEventListener("DOMContentLoaded", function () {
-
-      map.on('baselayerchange', function (e) {
-        if (e.layer.options.id == "mapbox/streets-v11"){
-          let colorChange = document.querySelectorAll('.color-change');
-          for(let c of colorChange){
-            c.classList.remove('white');
-            c.classList.add('black')
+      map.on("baselayerchange", function (e) {
+        if (e.layer.options.id == "mapbox/streets-v11") {
+          document.getElementById("singaporeMap").classList.remove("dark-mode");
+          document.getElementById("singaporeMap").classList.add("light-mode");
+          let colorChange = document.querySelectorAll(".color-change");
+          for (let c of colorChange) {
+            c.classList.remove("white");
+            c.classList.add("black");
           }
-          document.querySelector('#buddyBtn').classList.remove('filter-white');
-          document.querySelector('#buddyBtn').classList.add('filter-black');
+          document.querySelector("#buddyBtn").classList.remove("filter-white");
+          document.querySelector("#buddyBtn").classList.add("filter-black");
+        } else if (e.layer.options.id == "mapbox/dark-v10") {
+          document
+            .getElementById("singaporeMap")
+            .classList.remove("light-mode");
+          document.getElementById("singaporeMap").classList.add("dark-mode");
 
-        } else if (e.layer.options.id == "mapbox/dark-v10"){
-          let colorChange = document.querySelectorAll('.color-change');
-          for(let c of colorChange){
-            c.classList.remove('black');
-            c.classList.add('white');
+          let colorChange = document.querySelectorAll(".color-change");
+          for (let c of colorChange) {
+            c.classList.remove("black");
+            c.classList.add("white");
           }
-          document.querySelector('#buddyBtn').classList.remove('filter-black');
-          document.querySelector('#buddyBtn').classList.add('filter-white');
-        };
-    });
+          document.querySelector("#buddyBtn").classList.remove("filter-black");
+          document.querySelector("#buddyBtn").classList.add("filter-white");
+        }
+      });
 
       let landingSearchBtn = document.querySelector("#landingSearchBtn");
       landingSearchBtn.addEventListener("click", async function () {
+        //clear previous results
+        let allResults = document.querySelectorAll(".resultList");
+        for (let r of allResults) {
+          r.style.display = "none";
+        }
+
         // search validation
         let emptySearch = false;
 
@@ -79,6 +90,12 @@ async function main() {
 
       let mapSearchBtn = document.querySelector("#mapSearchBtn");
       mapSearchBtn.addEventListener("click", async function () {
+        //clear previous results
+        let allResults = document.querySelectorAll(".resultList");
+        for (let r of allResults) {
+          r.style.display = "none";
+        }
+
         // search validation
         let emptySearch = false;
 
@@ -116,6 +133,12 @@ async function main() {
 
       let locationSearchBtn = document.querySelector("#locationSearchBtn");
       locationSearchBtn.addEventListener("click", async function () {
+        //clear previous results
+        let allResults = document.querySelectorAll(".resultList");
+        for (let r of allResults) {
+          r.style.display = "none";
+        }
+
         // search validation
         let emptySearch = false;
 
@@ -131,8 +154,8 @@ async function main() {
         } else {
           resetMap();
           getLocation();
-          console.log(userLocation[0]);
-          console.log(searchInput);
+          // console.log(userLocation[0]);
+          // console.log(searchInput);
 
           let response = await searchPlaces(
             userLocation[0],
@@ -243,6 +266,13 @@ async function main() {
         resetMap();
         showMapPage();
 
+        // let surpriseModal = bootstrap.Modal.getInstance(document.getElementById('surpriseModal'))
+        // surpriseModal.hide();
+
+        //         // let surpriseModal = document.getElementById('surpriseModal');
+        //         // surpriseModal.hide();
+        //         // close modal here
+
         mapCenter = map.getBounds().getCenter();
 
         let response = await searchPlaces(
@@ -265,68 +295,49 @@ async function main() {
         showBuddyForm();
       });
 
-      let othersCheckbox = document.getElementById('othersCheckbox');
-      othersCheckbox.addEventListener('click', function() {
-        if (othersCheckbox.checked == true){
-          document.getElementById('othersSpecific').style.display = 'block'
+      let othersCheckbox = document.getElementById("othersCheckbox");
+      othersCheckbox.addEventListener("click", function () {
+        if (othersCheckbox.checked == true) {
+          document.getElementById("othersSpecific").style.display = "block";
         } else {
-          document.getElementById('othersSpecific').style.display = 'none'
+          document.getElementById("othersSpecific").style.display = "none";
         }
-      
-        
 
         // alert('hello')
         // document.getElementById('othersSpecific').style.display = 'block'
-      })
+      });
 
-      let agreetNc = document.querySelector('#agreetNc');
-      agreetNc.addEventListener('click', function(){
-        document.querySelector('#tNcCheckbox').disabled = false;
-      })
+      let agreetNc = document.querySelector("#agreetNc");
+      agreetNc.addEventListener("click", function () {
+        document.querySelector("#tNcCheckbox").disabled = false;
+      });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-      let submitBtn = document.querySelector('#submitBtn');
-      submitBtn.addEventListener('click', function() {
+      let submitBtn = document.querySelector("#submitBtn");
+      submitBtn.addEventListener("click", function () {
         // name error
-        let name = document.getElementById('name').value;
+        let name = document.getElementById("name").value;
         let nameNotProvided = false;
         let nameTooShort = false;
 
-        if (!name){
+        if (!name) {
           nameNotProvided = true;
-        } else if(name.length<3){
+        } else if (name.length < 3) {
           nameTooShort = true;
         }
 
-        if(nameNotProvided || nameTooShort){
-          if(nameNotProvided){
-            document.getElementById('nameValidation').innerHTML = 'Please enter your name'
+        if (nameNotProvided || nameTooShort) {
+          if (nameNotProvided) {
+            document.getElementById("nameValidation").innerHTML =
+              "Please enter your name";
           }
-          if(nameTooShort){
-            document.getElementById('nameValidation').innerHTML = 'Please nter a valid name'
+          if (nameTooShort) {
+            document.getElementById("nameValidation").innerHTML =
+              "Please nter a valid name";
           }
         }
 
         // age error
-        let dob = new Date(document.getElementById('dob').value);
+        let dob = new Date(document.getElementById("dob").value);
 
         let today = new Date();
         let currentYear = today.getFullYear();
@@ -341,35 +352,39 @@ async function main() {
         let ageMonth = currentMonth - birthMonth;
         let ageDay = currentDay - birthDay;
 
-        if(!age){
-          document.getElementById('ageValidation').innerHTML = "Please enter your age"
+        if (!age) {
+          document.getElementById("ageValidation").innerHTML =
+            "Please enter your age";
         }
-        if(age > 100){
-          document.getElementById('ageValidation').innerHTML = 'Please enter an age below 100 years old'
+        if (age > 100) {
+          document.getElementById("ageValidation").innerHTML =
+            "Please enter an age below 100 years old";
         }
-        if((age == 18 && ageMonth <= 0 && ageDay <= 0) || age < 18){
-          document.getElementById('ageValidation').innerHTML = "You have to be older than 18"
+        if ((age == 18 && ageMonth <= 0 && ageDay <= 0) || age < 18) {
+          document.getElementById("ageValidation").innerHTML =
+            "You have to be older than 18";
         }
 
         // gender error
         let gender = null;
-        for (let eachGender of document.querySelectorAll('.gender')){
-          if(eachGender.checked == true){
+        for (let eachGender of document.querySelectorAll(".gender")) {
+          if (eachGender.checked == true) {
             gender = eachGender.value;
-            document.getElementById('validationGender').innerHTML = ''
+            document.getElementById("genderValidation").innerHTML = "";
             break;
-          } 
+          }
         }
-        if(gender == null){
-          document.getElementById('validationGender').innerHTML = 'Please select your gender'
+        if (gender == null) {
+          document.getElementById("genderValidation").innerHTML =
+            "Please select your gender";
         }
 
         //email error
-        let email = document.getElementById('email').value;
+        let email = document.getElementById("email").value;
         validateEmail(email);
 
         //activities error
-        let allActivities = document.getElementsByClassName('.activity');
+        let allActivities = document.getElementsByClassName(".activity");
         let selectedActivities = [];
         for (let activity of allActivities) {
           if (activity.checked == true) {
@@ -377,31 +392,51 @@ async function main() {
           }
         }
         ////////work on this!!!!
-        if (selectedActivities.length==0){
-          document.querySelector('#activityValidation').innerHTML = `Please choose at least one activity`
+        if (selectedActivities.length == 0) {
+          document.querySelector(
+            "#activityValidation"
+          ).innerHTML = `Please choose at least one activity`;
         }
 
-        let otherActivity = document.querySelector('#othersSpecific').value;
-        if(!otherActivity){
-          document.querySelector('#activityValidation').innerHTML = 'Please let us know what activity you prefer'
+        let otherActivity = document.querySelector("#othersSpecific").value;
+        if (!otherActivity) {
+          document.querySelector("#activityValidation").innerHTML =
+            "Please let us know what activity you prefer";
         }
-
-
 
         //terms and conditions error
-        let tNcCheckbox = document.querySelector('#tNcCheckbox');
-        if(tNcCheckbox.checked == false){
-          document.querySelector('#tNcValidation').innerHTML = 'Please agree to the terms and conditions'
+        let tNcCheckbox = document.querySelector("#tNcCheckbox");
+        if (tNcCheckbox.checked == false) {
+          document.querySelector("#tNcValidation").innerHTML =
+            "Please agree to the terms and conditions";
         }
-        
 
-        console.log(name, dob, email, gender)
+        console.log(name, dob, email, gender);
 
         //submit response
+      });
+
+      //clear error message
+      function clearErrorMessage(inputID, event, errorID){
+        document.querySelector(inputID).addEventListener(event, function(){
+          document.querySelector(errorID).innerHTML='<br>'
+        })
+      }
+      clearErrorMessage('#name', 'keydown', '#nameValidation');
+      clearErrorMessage('#dob', 'click', '#ageValidation');
+      clearErrorMessage('#male-gender', 'click', '#genderValidation');
+      clearErrorMessage('#female-gender', 'click', '#genderValidation');
+      clearErrorMessage('#email', 'keydown', '#emailValidation');
+      let allActivities = document.querySelectorAll(".activity");
+      // allActivities.pop();
+      console.log(allActivities)
+      for(activity of allActivities){
+        // clearErrorMessage('#'+)
+        clearErrorMessage('#'+ activity.id, 'click', '#activityValidation');
+      }
 
 
 
-      })
 
 
 
@@ -412,7 +447,6 @@ async function main() {
 
 
 
-      
     });
   }
 

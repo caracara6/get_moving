@@ -50,12 +50,13 @@
               <div class="mb-3">
                 <input
                   type="text"
+                  autocomplete="off"
                   class="form-control mt-3 border border-3 border-danger"
                   id="searchInput"
                   aria-describedby="emailHelp"
                   placeholder="What's your favourite sport?"
                 />
-                <div id="searchValidation" class="form-text ms-1"><br /></div>
+                <div id="searchValidation" class="form-text ms-1"><br/></div>
               </div>
             </div>
 
@@ -63,8 +64,11 @@
               <button
                 type="submit"
                 id="landingSearchBtn"
-                class="btn btn-outline-danger border border-3 border-danger"
-              >
+                class="btn"
+                </button>
+
+                <!-- btn-outline-danger border-danger -->
+              
                 Submit
               </button>
 
@@ -72,9 +76,9 @@
               <button
                 type="button"
                 id="surpriseMeBtn"
-                class="btn btn-outline-danger border border-3 border-danger ms-3"
+                class="btn ms-3"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#surpriseModal"
               >
                 Surprise me
               </button>
@@ -82,7 +86,7 @@
               <!-- surprise modal starts-->
               <div
                 class="modal fade"
-                id="exampleModal"
+                id="surpriseModal"
                 tabindex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
@@ -107,7 +111,7 @@
                     <div class="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-outline-danger border border-3 border-danger"
+                        class="btn"
                         id="letsGoBtn"
                         data-bs-dismiss="modal"
                       >
@@ -263,19 +267,19 @@
                       name="name"
                       id="name"
                     />
-                    <div id="nameValidation"></div>
+                    <div id="nameValidation"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label class="col-2">Date of Birth:</label>
-                  <div id="emailWrapper" class="col">
+                  <div id="ageWrapper" class="col">
                     <input
                       type="date"
                       class="form-control"
                       id="dob"
                       name="dob"
                     />
-                    <div id="ageValidation"></div>
+                    <div id="ageValidation"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -305,7 +309,7 @@
                         >Female</label
                       >
                     </div>
-                    <div id="validationGender"></div>
+                    <div id="genderValidation"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -421,6 +425,7 @@
                         I agree to the
                         <a
                           href=""
+                          id="tNc"
                           data-bs-toggle="modal"
                           data-bs-target="#tNcModal"
                           >terms and conditions.</a
@@ -433,7 +438,7 @@
 
                 <input
                   type="submit"
-                  class="btn btn-outline-danger border border-3 border-danger mt-3"
+                  class="btn mt-3"
                   id="submitBtn"
                 />
               </div>
@@ -469,7 +474,7 @@
             <button
               type="button"
               id="agreetNc"
-              class="btn btn-outline-danger border border-3 border-danger"
+              class="btn"
               data-bs-dismiss="modal"
             >
               Okay
