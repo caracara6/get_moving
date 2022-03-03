@@ -41,26 +41,29 @@
           class="container-fluid d-flex justify-content-center align-items-center px-5 border border-primary"
         >
           <div id="searchWrapper" class="border border-danger flex-grow-1">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center">
               <h1 class="display-1 mt-3">Get Sporty</h1>
             </div>
 
             <!-- search input starts -->
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control mt-3"
-                id="searchInput"
-                aria-describedby="emailHelp"
-                placeholder="What's your favourite sport?"
-              />
-              <div id="searchValidation" class="form-text ms-1"><br /></div>
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control mt-3 border border-3 border-danger"
+                  id="searchInput"
+                  aria-describedby="emailHelp"
+                  placeholder="What's your favourite sport?"
+                />
+                <div id="searchValidation" class="form-text ms-1"><br /></div>
+              </div>
             </div>
+
             <div class="d-flex justify-content-center">
               <button
                 type="submit"
                 id="landingSearchBtn"
-                class="btn btn-primary"
+                class="btn btn-outline-danger border border-3 border-danger"
               >
                 Submit
               </button>
@@ -69,7 +72,7 @@
               <button
                 type="button"
                 id="surpriseMeBtn"
-                class="btn btn-primary ms-3"
+                class="btn btn-outline-danger border border-3 border-danger ms-3"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -92,7 +95,7 @@
                       </h5>
                       <button
                         type="button"
-                        class="btn-close"
+                        class="btn-close btn btn-outline-danger border border-3 border-danger"
                         data-bs-dismiss="modal"
                         aria-label="Close"
                       ></button>
@@ -104,7 +107,7 @@
                     <div class="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-outline-danger border border-3 border-danger"
                         id="letsGoBtn"
                         data-bs-dismiss="modal"
                       >
@@ -133,55 +136,36 @@
           <ul class="nav nav-pills rounded shadow" id="infoTab">
             <li class="nav-item sportsIcon mx-1">
               <i
-                class="fa-solid fa-circle-arrow-left fa-bounce my-3"
+                class="fa-solid fa-circle-arrow-left my-3 color-change"
                 id="backBtn"
               ></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-dumbbell fa-bounce my-3" id="gymBtn"></i>
+              <i class="fa-solid fa-dumbbell my-3 color-change" id="gymBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i
-                class="fa-solid fa-basketball fa-bounce my-3"
-                id="basketballBtn"
-              ></i>
+              <i class="fa-solid fa-basketball my-3 color-change" id="basketballBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i
-                class="fa-solid fa-golf-ball-tee fa-bounce my-3"
-                id="golfBtn"
-              ></i>
+              <i class="fa-solid fa-golf-ball-tee my-3 color-change" id="golfBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i
-                class="fa-solid fa-bowling-ball fa-bounce my-3"
-                id="bowlingBtn"
-              ></i>
+              <i class="fa-solid fa-bowling-ball my-3 color-change" id="bowlingBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i
-                class="fa-solid fa-person-swimming fa-bounce my-3"
-                id="swimmingBtn"
-              ></i>
+              <i class="fa-solid fa-person-swimming my-3 color-change" id="swimmingBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i
-                class="fa-solid fa-volleyball fa-bounce my-3"
-                id="volleyballBtn"
-              ></i>
+              <i class="fa-solid fa-volleyball my-3 color-change" id="volleyballBtn"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i
-                class="fa-solid fa-person-biking fa-bounce my-3"
-                id="cyclingBtn"
-              ></i>
+              <i class="fa-solid fa-person-biking my-3 color-change" id="cyclingBtn"></i>
             </li>
 
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle px-1 py-2"
+                class="nav-link dropdown-toggle px-1 py-2 color-change"
                 data-bs-toggle="dropdown"
-                href=""
                 id="dropdownButton"
                 role="button"
                 aria-expanded="false"
@@ -201,25 +185,54 @@
             <input
               type="search"
               id="mapSearchInput"
-              class="form-control"
+              class="form-control border border-3 border-danger"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="search-addon"
             />
-            <span class="input-group-text border-0" id="mapSearchBtn">
+            <span
+              class="input-group-text border border-3 border-danger"
+              id="mapSearchBtn"
+            >
               <i class="fas fa-search"></i>
             </span>
-            <span class="input-group-text border-0" id="locationSearchBtn">
+            <span
+              class="input-group-text border border-3 border-danger"
+              id="locationSearchBtn"
+            >
               <i class="fa-solid fa-location-crosshairs"></i>
             </span>
           </div>
           <!-- map search ends -->
           <div id="buddy-icon">
+
+
+
+
+
+
+
+
+
             <img
               id="buddyBtn"
-              src="icons/high-five.png"
+              class=""
+              src="icons/high-five.svg"
               alt="find-sports-buddy"
             />
+
+
+
+
+
+
+
+
+
+
+
+
+            
           </div>
         </section>
       </div>
@@ -367,25 +380,16 @@
                         >Others</label
                       >
                     </div>
-                    <div
-                    class="mb-3"
-                    id="othersSpecific"
-                    style="display: none"
-                  >
-                    <label class="mt-2">Please elaborate:</label>
-                    <input
-                      type="text"
-                      class="col form-control"
-                      name="othersSpecific"
-                      id='othersSpecific'
-                    />
-                  </div>
-                  <div id="activityValidation"></div>
-
-
-
-
-
+                    <div class="mb-3" id="othersSpecific" style="display: none">
+                      <label class="mt-2">Please elaborate:</label>
+                      <input
+                        type="text"
+                        class="col form-control"
+                        name="othersSpecific"
+                        id="othersSpecific"
+                      />
+                    </div>
+                    <div id="activityValidation"></div>
                   </div>
                   <!-- <div
                     class="row mb-3"
@@ -401,33 +405,35 @@
                   </div> -->
                 </div>
 
-
-
-
                 <div class="row mb-3">
                   <div class="col-2"></div>
                   <div id="tNcWrapper" class="col">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="tNcCheckbox" disabled>
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="tNcCheckbox"
+                        disabled
+                      />
                       <label class="form-check-label" for="tNcCheckbox">
                         <!-- tNc Modal trigger -->
-                        I agree to the <a href="" data-bs-toggle="modal" data-bs-target="#tNcModal">terms and conditions.</a>
-           
+                        I agree to the
+                        <a
+                          href=""
+                          data-bs-toggle="modal"
+                          data-bs-target="#tNcModal"
+                          >terms and conditions.</a
+                        >
                       </label>
                     </div>
                     <div id="tNcValidation"></div>
                   </div>
                 </div>
 
-
-
-
-
-                
-
                 <input
                   type="submit"
-                  class="btn btn-primary mt-3"
+                  class="btn btn-outline-danger border border-3 border-danger mt-3"
                   id="submitBtn"
                 />
               </div>
@@ -439,30 +445,39 @@
       <!-- form page ends -->
     </div>
 
-
-
-                    <!-- tNc Modal -->
-<div class="modal fade" id="tNcModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        blah blah
-      </div>
-      <div class="modal-footer">
-        <button type="button" id='agreetNc' class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+    <!-- tNc Modal -->
+    <div
+      class="modal fade"
+      id="tNcModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close btn btn-outline-danger border border-3 border-danger"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">blah blah</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="agreetNc"
+              class="btn btn-outline-danger border border-3 border-danger"
+              data-bs-dismiss="modal"
+            >
+              Okay
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
 
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

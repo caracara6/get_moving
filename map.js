@@ -16,6 +16,28 @@ async function main() {
     map = initMap();
 
     window.addEventListener("DOMContentLoaded", function () {
+
+      map.on('baselayerchange', function (e) {
+        if (e.layer.options.id == "mapbox/streets-v11"){
+          let colorChange = document.querySelectorAll('.color-change');
+          for(let c of colorChange){
+            c.classList.remove('white');
+            c.classList.add('black')
+          }
+          document.querySelector('#buddyBtn').classList.remove('filter-white');
+          document.querySelector('#buddyBtn').classList.add('filter-black');
+
+        } else if (e.layer.options.id == "mapbox/dark-v10"){
+          let colorChange = document.querySelectorAll('.color-change');
+          for(let c of colorChange){
+            c.classList.remove('black');
+            c.classList.add('white');
+          }
+          document.querySelector('#buddyBtn').classList.remove('filter-black');
+          document.querySelector('#buddyBtn').classList.add('filter-white');
+        };
+    });
+
       let landingSearchBtn = document.querySelector("#landingSearchBtn");
       landingSearchBtn.addEventListener("click", async function () {
         // search validation
@@ -50,7 +72,7 @@ async function main() {
 
           // console.log(response.results);
 
-          plotSearchCoordinates(response.results, "icons/search.png");
+          plotSearchCoordinates(response.results, "icons/search.svg");
           searchLayer.addTo(map);
         }
       });
@@ -87,7 +109,7 @@ async function main() {
 
           // console.log(response.results);
 
-          plotSearchCoordinates(response.results, "icons/search.png");
+          plotSearchCoordinates(response.results, "icons/search.svg");
           searchLayer.addTo(map);
         }
       });
@@ -123,7 +145,7 @@ async function main() {
           document.querySelector("#dropdownButton").classList.add("show");
           document.querySelector("#infoTabSearchResults").classList.add("show");
 
-          plotSearchCoordinates(response.results, "icons/search.png");
+          plotSearchCoordinates(response.results, "icons/search.svg");
           searchLayer.addTo(map);
         }
       });
@@ -234,7 +256,7 @@ async function main() {
         document.querySelector("#dropdownButton").classList.add("show");
         document.querySelector("#infoTabSearchResults").classList.add("show");
 
-        plotSearchCoordinates(response.results, "icons/search.png");
+        plotSearchCoordinates(response.results, "icons/search.svg");
         searchLayer.addTo(map);
       });
 
@@ -418,17 +440,30 @@ async function main() {
 
     // Add dark layer
     darkMode = L.tileLayer(
-      "https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}",
+      "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
       {
         attribution:
-          '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        minZoom: 0,
-        maxZoom: 22,
-        subdomains: "abcd",
+          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: "mapbox/dark-v10",
+        tileSize: 512,
+        zoomOffset: -1,
         accessToken:
-          "GSRGuSqDDcYgQnf3k9ESutlUBugw4YctZAzWNSE7iZLhxb0jQZLuHbOXq5etkVAQ",
+          "pk.eyJ1IjoiY2FyYWNhcmE2IiwiYSI6ImNrenV6anhiMjdyamYyd25mYXB3N2V6aGUifQ._MiXk72eEw378aB0cJnNng",
       }
     );
+    // darkMode = L.tileLayer(
+    //   "https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}",
+    //   {
+    //     attribution:
+    //       '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    //     minZoom: 0,
+    //     maxZoom: 22,
+    //     subdomains: "abcd",
+    //     accessToken:
+    //       "GSRGuSqDDcYgQnf3k9ESutlUBugw4YctZAzWNSE7iZLhxb0jQZLuHbOXq5etkVAQ",
+    //   }
+    // );
 
     let userMarker = L.marker(singapore, { draggable: true });
     let popup = userMarker.bindPopup("Hello");
