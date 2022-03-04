@@ -219,21 +219,22 @@ function showBuddyForm() {
 }
 
 function closeBuddyForm() {
+  document.querySelector("#page3").classList.remove("show")
   document.querySelector("#page3").classList.add("hidden");
 }
 
-function validateEmail(email) {
-  
-  let validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if (email.match(validEmail)) {
-    document.querySelector("#emailValidation").innerHTML = "";
-    return true;
-  } else {
-    document.querySelector("#emailValidation").innerHTML =
-      "Please enter a valid email";
-    return false;
-  }
-}
+// function resetRadioBtn(input, ) {
+
+// }
+
+// function resetCheckboxes(){
+
+// }
+
+// function resetTextInput(){
+
+// }
+
 
 // for (let eachResult of response.results) {
 //   let resultCoordinate = [

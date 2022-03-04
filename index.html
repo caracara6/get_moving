@@ -247,8 +247,14 @@
         <section class="container-fluid ht-100vh" id="buddy-page">
           <div class="row">
             <div class="col-3 d-none d-lg-block"></div>
-            <header class="col p-5">
+            <header class="col p-5 border border-danger d-flex">
               <h1>Find a workout buddy</h1>
+              <button 
+              type="button"
+              onclick="closeBuddyForm()"
+              class="ms-auto btn-close btn btn-outline-danger border border-3 border-danger" 
+              aria-label="Close">
+            </button>
             </header>
             <div class="col-3 d-none d-lg-block"></div>
           </div>
@@ -375,10 +381,10 @@
                     <div class="form-check">
                       <input
                         class="form-check-input activity"
+                        //class="activity"
                         id="othersCheckbox"
                         type="checkbox"
                         value="Others"
-                        id="others"
                       />
                       <label class="form-check-label" for="others"
                         >Others</label
@@ -390,7 +396,7 @@
                         type="text"
                         class="col form-control"
                         name="whatOthers"
-                        id="whatOthers"
+                        id="whatOthersInput"
                       />
                     </div>
                     <div id="activityValidation"></div>
@@ -422,14 +428,18 @@
                       </label>
                     </div>
                     <div id="tNcValidation"></div>
+                    <input
+                  type="submit"
+                  class="btn my-3"
+                  id="submitBtn"
+                />
+                    <div id="submitResponse"><br></div>
+
+
                   </div>
                 </div>
 
-                <input
-                  type="submit"
-                  class="btn mt-3"
-                  id="submitBtn"
-                />
+                
               </div>
             </div>
             <div class="col-3 d-none d-lg-block"></div>

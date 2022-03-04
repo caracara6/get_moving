@@ -292,6 +292,7 @@ async function main() {
 
       let buddyBtn = document.querySelector("#buddyBtn");
       buddyBtn.addEventListener("click", function () {
+        document.querySelector('#submitResponse').innerHTML = `<span><br></span>`
         showBuddyForm();
       });
 
@@ -311,11 +312,28 @@ async function main() {
 
       let submitBtn = document.querySelector("#submitBtn");
       submitBtn.addEventListener("click", function () {
-        // name error
-        let name = document.getElementById("name").value;
+
+        //flags
         let nameNotProvided = false;
         let nameTooShort = false;
+        let noDOBProvided = false;
+        let ageTooYoung = false;
+        let ageTooOld = false;
+        let genderNotProvided = false;
+        let emailNotProvided = false;
+        let emailInvalid = false;
+        let noActivitySelected = false;
+        let noOthersSpecified = false;
+        let tNcUnchecked = false;
 
+        let flags = [nameNotProvided, nameTooShort, noDOBProvided, ageTooYoung,
+                    ageTooOld, genderNotProvided, emailNotProvided, emailInvalid,
+                    noActivitySelected, noOthersSpecified, tNcUnchecked];
+
+
+        // name error
+        let name = document.getElementById("name").value;
+        
         if (!name) {
           nameNotProvided = true;
         } else if (name.length < 3) {
@@ -350,14 +368,17 @@ async function main() {
         let ageDay = currentDay - birthDay;
 
         if (!age) {
+          noDOBProvided = true;
           document.getElementById("ageValidation").innerHTML =
             "Please enter your age";
         }
         if (age > 100) {
+          ageTooOld = true;
           document.getElementById("ageValidation").innerHTML =
-            "Please enter an age below 100 years old";
+            "You can't be older than 100";
         }
         if ((age == 18 && ageMonth <= 0 && ageDay <= 0) || age < 18) {
+          ageTooYoung = true;
           document.getElementById("ageValidation").innerHTML =
             "You have to be older than 18";
         }
@@ -372,48 +393,72 @@ async function main() {
           }
         }
         if (gender == null) {
+          genderNotProvided = true;
           document.getElementById("genderValidation").innerHTML =
             "Please select your gender";
         }
 
         //email error
+        function validateEmail(email) {
+          let validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+          if (email.match(validEmail)) {
+            document.querySelector("#emailValidation").innerHTML = "";
+            return true;
+          } else if(!email){
+            emailNotProvided = true;
+            document.querySelector("#emailValidation").innerHTML =
+              "Please enter your email";
+          }
+          else {
+            emailInvalid = true;
+            document.querySelector("#emailValidation").innerHTML =
+              "Please enter a valid email";
+            return false;
+          }
+        }
+
         let email = document.getElementById("email").value;
         validateEmail(email);
 
         //activities error
-        let allActivities = document.getElementsByClassName(".activity");
+        let allActivities = document.getElementsByClassName("activity");
         let selectedActivities = [];
         for (let activity of allActivities) {
           if (activity.checked == true) {
             selectedActivities.push(activity.value);
           }
         }
-        ////////work on this!!!!
+
         if (selectedActivities.length == 0) {
+          noActivitySelected = true;
           document.querySelector(
             "#activityValidation"
-          ).innerHTML = `Please choose at least one activity`;
+          ).innerHTML = `Please indicate at least one activity`;
         }
 
-
-
-
-        let whatOthers = document.querySelector("#whatOthers").value;
-        if (!whatOthers) {
+        if(document.querySelector('#othersCheckbox').checked==true){
+          let whatOthers = document.querySelector("#whatOthersInput").value;
+          if (!whatOthers) {
+          noOthersSpecified = true;
           document.querySelector("#activityValidation").innerHTML =
             "Please let us know what activity you prefer";
+          }
         }
 
         //terms and conditions error
         let tNcCheckbox = document.querySelector("#tNcCheckbox");
         if (tNcCheckbox.checked == false) {
+          tNcUnchecked = true;
           document.querySelector("#tNcValidation").innerHTML =
             "Please agree to the terms and conditions";
         }
 
-        console.log(name, dob, email, gender);
-
         //submit response
+        let flagged = flags.filter(flag => flag == true);
+        if (flagged.length == 0){
+          document.querySelector('#submitResponse').innerHTML = `<span>We have received your response, and will contact you if there is a match!</span>`
+          setTimeout(closeBuddyForm, 4000);
+        } 
       });
 
       //clear error message
@@ -436,26 +481,17 @@ async function main() {
       for(ID of activitiesIDs){
         clearErrorMessage('#'+ ID, 'click', '#activityValidation');
       }
-      // if(document.getElementById('others').checked == true){
-      //   clearErrorMessage('#whatOthers', 'keydown', '#activityValidation')
-      // }
+      document.getElementById('othersCheckbox').addEventListener('click', function(){
+        if(document.getElementById('othersCheckbox').checked == true){
+          clearErrorMessage('#whatOthers', 'keydown', '#activityValidation')
+        }
+      })
 
       document.querySelector("#tNcCheckbox").addEventListener('click', function(){
         if(document.querySelector("#tNcCheckbox").checked == true){
           document.querySelector('#tNcValidation').innerHTML='<br>'
         }
       })
-
-
-
-
-
-
-
-
-
-
-
 
     });
   }
