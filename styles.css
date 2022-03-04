@@ -39,6 +39,10 @@ body {
   color: red;
 }
 
+.leaflet-control-container .fa-solid{
+  font-size: 1rem;
+}
+
 #searchInput{
   width: 20rem;
   color: red;
@@ -59,9 +63,6 @@ body {
   background-color:rgba(255,0,0,0.5) !important;
   color:white;
 }
-
-
-
 
 button{
   background-color:rgba(0, 0, 0, 0);
@@ -91,10 +92,23 @@ button:hover, {
 
 #landingPage {
   height: 100vh;
-  background-image: url("images/swimming.jpg");
+  position:relative;
+  /* background-image: url("images/swimming.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover; */
+}
+
+#background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 #mapPage {
@@ -187,6 +201,8 @@ button:hover, {
   filter: invert(100%) sepia(1%) saturate(677%) hue-rotate(268deg) brightness(122%) contrast(100%);
 }
 
+/* .leaflet-popup-content-wrapper:not(.popupPhoto) */
+
 .light-mode .leaflet-marker-pane img {
   filter: invert(0%) sepia(1%) saturate(4690%) hue-rotate(115deg) brightness(79%) contrast(100%);
 }
@@ -219,6 +235,10 @@ button:hover, {
   #buddy-icon>img{
     width: 4.5rem;
     height: 4.5rem
+  }
+  .leaflet-control-container .fa-solid{
+    font-size: 2rem;
+    padding: 0.25rem 0.5rem;
   }
 }
 

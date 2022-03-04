@@ -55,14 +55,6 @@ async function searchSport(lat, lng, sport) {
   return response.data;
 }
 
-
-
-
-
-
-
-
-
 async function plotSearchCoordinates(response, iconUrl) {
   let searchResultElement = document.querySelector("#infoTabSearchResults");
   for (let eachResult of response) {
@@ -90,14 +82,23 @@ async function plotSearchCoordinates(response, iconUrl) {
     }
 
     resultMarker.bindPopup(`<div>
-      <div>${eachResult.name}</div>
+      <div>
+      <ul>
+      <li><span>${eachResult.name}</span></li>
+      <li><span>${eachResult.location.formatted_address}</span></li>
+      <li><span>${eachResult.location.post_town}</span></li>
+      </ul>
+      </div>
       <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
             </div>`);
 
     resultMarker.addTo(searchLayer);
 
     let resultElement = document.createElement("li");
-    resultElement.innerHTML = eachResult.name;
+    resultElement.innerHTML = 
+    `<div>
+    ${eachResult.name}
+    </div>`
     resultElement.className = "resultList";
 
     resultElement.addEventListener("click", function () {
@@ -139,11 +140,17 @@ async function plotSportsCoordinates(response, iconUrl) {
       });
     }
 
-    resultMarker.bindPopup(`<div>
-            <div>${eachResult.name}</div>
-            <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
-            <button type="button" class="btn btn-primary">Directions</button>
-            </div>`);
+    resultMarker.bindPopup(
+      `<div>
+          <div>
+            <ul>
+              <li><span>${eachResult.name}</span></li>
+              <li><span>${eachResult.location.formatted_address}</span></li>
+              <li><span>${eachResult.location.post_town}</span></li>
+            </ul>
+          </div>
+          <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
+      </div>`);
     resultMarker.addTo(sportClusterLayer);
     sportClusterLayer.addTo(map);
     resultMarker.addEventListener("click", function () {
@@ -161,7 +168,7 @@ async function showCyclingPath() {
       tempDiv.innerHTML = feature.properties.Description;
       let allTds = tempDiv.querySelectorAll("td");
       let pathName = allTds[0].innerHTML;
-      layer.bindPopup(`<div>${pathName} Cycling Path</div>`);
+      layer.bindPopup(`<div><span>${pathName} Cycling Path</span></div>`);
     },
   }).addTo(cyclingLayer);
   showCyclingLayer.setStyle({
@@ -223,17 +230,31 @@ function closeBuddyForm() {
   document.querySelector("#page3").classList.add("hidden");
 }
 
-// function resetRadioBtn(input, ) {
+function resetRadioBtn(identifier) {
+  let allRadioBtns = document.querySelectorAll(`input[type=${identifier}]`);
+  for(let r of allRadioBtns){
+    r.checked = false
+  }
+}
+function resetDate (identifier){
+  let allDates =  document.querySelectorAll(`input[type=${identifier}]`);
+  for(let d of allDates){
+    d.value = null;
+  }
+}
+function resetCheckboxes(identifier){
+  let allCheckboxes = document.querySelectorAll(`input[type=${identifier}]`);
+  for(let c of allCheckboxes){
+    c.checked = false
+  }
+}
 
-// }
-
-// function resetCheckboxes(){
-
-// }
-
-// function resetTextInput(){
-
-// }
+function resetTextInput(identifier){
+  let allTextboxes = document.querySelectorAll(`input[type=${identifier}]`);
+  for(let t of allTextboxes){
+    t.value = ""
+  }
+}
 
 
 // for (let eachResult of response.results) {

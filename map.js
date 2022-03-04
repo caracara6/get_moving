@@ -81,7 +81,7 @@ async function main() {
           document.querySelector("#dropdownButton").classList.add("show");
           document.querySelector("#infoTabSearchResults").classList.add("show");
 
-          // console.log(response.results);
+          console.log(response.results);
 
           plotSearchCoordinates(response.results, "icons/search.svg");
           searchLayer.addTo(map);
@@ -293,6 +293,10 @@ async function main() {
       let buddyBtn = document.querySelector("#buddyBtn");
       buddyBtn.addEventListener("click", function () {
         document.querySelector('#submitResponse').innerHTML = `<span><br></span>`
+        resetRadioBtn('radio');
+        resetDate('date');
+        resetCheckboxes('checkbox');
+        resetTextInput('text');
         showBuddyForm();
       });
 
@@ -314,40 +318,47 @@ async function main() {
       submitBtn.addEventListener("click", function () {
 
         //flags
-        let nameNotProvided = false;
-        let nameTooShort = false;
-        let noDOBProvided = false;
-        let ageTooYoung = false;
-        let ageTooOld = false;
-        let genderNotProvided = false;
-        let emailNotProvided = false;
-        let emailInvalid = false;
-        let noActivitySelected = false;
-        let noOthersSpecified = false;
-        let tNcUnchecked = false;
 
-        let flags = [nameNotProvided, nameTooShort, noDOBProvided, ageTooYoung,
-                    ageTooOld, genderNotProvided, emailNotProvided, emailInvalid,
-                    noActivitySelected, noOthersSpecified, tNcUnchecked];
+        let flag = false;
+
+        // let nameNotProvided = false;
+        // let nameTooShort = false;
+        // let noDOBProvided = false;
+        // let ageTooYoung = false;
+        // let ageTooOld = false;
+        // let genderNotProvided = false;
+        // let emailNotProvided = false;
+        // let emailInvalid = false;
+        // let noActivitySelected = false;
+        // let noOthersSpecified = false;
+        // let tNcUnchecked = false;
+
+        // flags = [nameNotProvided, nameTooShort, noDOBProvided, ageTooYoung,
+        //             ageTooOld, genderNotProvided, emailNotProvided, emailInvalid,
+        //             noActivitySelected, noOthersSpecified, tNcUnchecked];
+
+        // console.log(flags)
 
 
         // name error
         let name = document.getElementById("name").value;
         
-        if (!name) {
-          nameNotProvided = true;
-        } else if (name.length < 3) {
-          nameTooShort = true;
-        }
+        // if (!name) {
+        //   flag = true;
+        // } else if (name.length < 3) {
+        //   nameTooShort = true;
+        // }
 
-        if (nameNotProvided || nameTooShort) {
-          if (nameNotProvided) {
+        if (!name || name.length < 3) {
+          if (!name) {
+            flag = true;
             document.getElementById("nameValidation").innerHTML =
-              "Please enter your name";
+              "<span>Please enter your name</span>";
           }
-          if (nameTooShort) {
+          if (name.length < 3) {
+            flag = true;
             document.getElementById("nameValidation").innerHTML =
-              "Please enter a valid name";
+              "<span>Please enter a valid name</span>";
           }
         }
 
@@ -363,56 +374,64 @@ async function main() {
         let birthMonth = dob.getMonth();
         let birthDay = dob.getDate();
 
-        let age = currentYear - birthYear;
+        let ageYear = currentYear - birthYear;
         let ageMonth = currentMonth - birthMonth;
         let ageDay = currentDay - birthDay;
 
-        if (!age) {
-          noDOBProvided = true;
+        if (dob == "Invalid Date") {
+          flag = true;
           document.getElementById("ageValidation").innerHTML =
-            "Please enter your age";
-        }
-        if (age > 100) {
-          ageTooOld = true;
+            "<span>Please enter your age</span>";
+        } 
+        if (ageYear > 100) {
+          flag = true;
           document.getElementById("ageValidation").innerHTML =
-            "You can't be older than 100";
+            "<span>You can't be older than 100</span>";
+        } 
+        // if (ageYear == 18 && ageMonth <= 0 && ageDay <= 0) {
+        //   flag = true;
+        //   document.getElementById("ageValidation").innerHTML =
+        //     "<span>You have to be older than 18</span>";
+        // }
+        if (ageMonth < 0 || (ageMonth == 0 && ageDay < 0)) {
+          ageYear = parseInt(ageYear) - 1;
         }
-        if ((age == 18 && ageMonth <= 0 && ageDay <= 0) || age < 18) {
-          ageTooYoung = true;
-          document.getElementById("ageValidation").innerHTML =
-            "You have to be older than 18";
-        }
+        // if (ageYear < 18){
+        //   flag = true;
+        //   document.getElementById("ageValidation").innerHTML =
+        //     "<span>You have to be older than 18</span>";
+        // }
 
         // gender error
         let gender = null;
         for (let eachGender of document.querySelectorAll(".gender")) {
           if (eachGender.checked == true) {
             gender = eachGender.value;
-            document.getElementById("genderValidation").innerHTML = "";
             break;
           }
         }
         if (gender == null) {
-          genderNotProvided = true;
+          flag = true;
           document.getElementById("genderValidation").innerHTML =
-            "Please select your gender";
+            "<span>Please select your gender</span>";
         }
 
         //email error
         function validateEmail(email) {
           let validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
           if (email.match(validEmail)) {
-            document.querySelector("#emailValidation").innerHTML = "";
+            flag = false;
+            document.querySelector("#emailValidation").innerHTML = '<br>'
             return true;
           } else if(!email){
-            emailNotProvided = true;
+            flag = true;
             document.querySelector("#emailValidation").innerHTML =
-              "Please enter your email";
+              "<span>Please enter your email</span>";
           }
           else {
-            emailInvalid = true;
+            flag = true;
             document.querySelector("#emailValidation").innerHTML =
-              "Please enter a valid email";
+              "<span>Please enter a valid email</span>";
             return false;
           }
         }
@@ -430,32 +449,41 @@ async function main() {
         }
 
         if (selectedActivities.length == 0) {
-          noActivitySelected = true;
+          flag = true;
           document.querySelector(
             "#activityValidation"
-          ).innerHTML = `Please indicate at least one activity`;
+          ).innerHTML = `<span>Please indicate at least one activity</span>`;
         }
 
         if(document.querySelector('#othersCheckbox').checked==true){
           let whatOthers = document.querySelector("#whatOthersInput").value;
           if (!whatOthers) {
-          noOthersSpecified = true;
+            flag = true;
           document.querySelector("#activityValidation").innerHTML =
-            "Please let us know what activity you prefer";
+            "<span>Please let us know what activity you prefer</span>";
           }
         }
 
         //terms and conditions error
         let tNcCheckbox = document.querySelector("#tNcCheckbox");
         if (tNcCheckbox.checked == false) {
-          tNcUnchecked = true;
+          flag = true;
           document.querySelector("#tNcValidation").innerHTML =
-            "Please agree to the terms and conditions";
+            "<span>Please agree to the terms and conditions</span>";
         }
 
+        // console.log(genderNotProvided)
+        // console.log(tNcUnchecked)
+
+        // for(let flag of flags){
+        //   console.log(flag);
+        // }
+
         //submit response
-        let flagged = flags.filter(flag => flag == true);
-        if (flagged.length == 0){
+        // let errors = flags.filter(flag => flag == true);
+        // console.log(errors)
+        if (flag == false){       //if no errors
+          
           document.querySelector('#submitResponse').innerHTML = `<span>We have received your response, and will contact you if there is a match!</span>`
           setTimeout(closeBuddyForm, 4000);
         } 
@@ -551,8 +579,8 @@ async function main() {
 
     // Set up base layers
     baseMaps = {
-      Light: lightMode,
-      Dark: darkMode,
+      '<i class="fa-solid fa-sun"></i>': lightMode,
+      '<i class="fa-solid fa-cloud-moon"></i>' : darkMode,
     };
 
     // Set up overlays
