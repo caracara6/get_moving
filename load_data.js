@@ -55,7 +55,7 @@ async function searchSport(lat, lng, sport) {
   return response.data;
 }
 
-async function plotSearchCoordinates(response, iconUrl) {
+async function plotSearchCoordinates(response, iconUrl, layer) {
   let searchResultElement = document.querySelector("#infoTabSearchResults");
   for (let eachResult of response) {
     let resultCoordinate = [
@@ -68,9 +68,7 @@ async function plotSearchCoordinates(response, iconUrl) {
     });
 
     let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
-
     let resultPhoto = await searchPhoto(eachResult.fsq_id);
-
     let resultPhotoUrl = null;
 
     if (resultPhoto.length == 0) {
@@ -92,7 +90,7 @@ async function plotSearchCoordinates(response, iconUrl) {
       <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
             </div>`);
 
-    resultMarker.addTo(searchLayer);
+    resultMarker.addTo(layer);
 
     let resultElement = document.createElement("li");
     resultElement.innerHTML = 
@@ -113,25 +111,24 @@ async function plotSearchCoordinates(response, iconUrl) {
     // setInterval(function () {searchResultElement.appendChild(resultElement)}, 2000);
     searchResultElement.appendChild(resultElement);
   }
+  layer.addTo(map)
 }
 
-async function plotSportsCoordinates(response, iconUrl) {
+async function plotSportsCoordinates(response, iconUrl, layer) {
   for (let eachResult of response) {
     let resultCoordinate = [
       eachResult.geocodes.main.latitude,
       eachResult.geocodes.main.longitude,
     ];
-
     let resultIcon = L.icon({
       iconUrl: iconUrl,
       iconSize: [35, 35],
     });
 
     let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
-
     let resultPhoto = await searchPhoto(eachResult.fsq_id);
-
     let resultPhotoUrl = null;
+
     if (resultPhoto.length == 0) {
       continue;
     } else {
@@ -151,13 +148,13 @@ async function plotSportsCoordinates(response, iconUrl) {
           </div>
           <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
       </div>`);
-    resultMarker.addTo(sportClusterLayer);
-    sportClusterLayer.addTo(map);
+    resultMarker.addTo(layer);
     resultMarker.addEventListener("click", function () {
       map.flyTo(resultCoordinate, 16);
       resultMarker.openPopup();
     });
   }
+  layer.addTo(map)
 }
 
 async function showCyclingPath() {
@@ -172,18 +169,27 @@ async function showCyclingPath() {
     },
   }).addTo(cyclingLayer);
   showCyclingLayer.setStyle({
-    color: "#F226EE",
-    opacity: 0.5,
+    color: "#F2265D",
+    opacity: 0.3,
     weight: 5,
   });
   return showCyclingLayer;
+}
+
+function clearResults() {
+  let allResults = document.querySelectorAll(".resultList");
+        for (let r of allResults) {
+          r.style.display = "none";
+        }
 }
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(showPosition);
   }
-  // else{} ???????
+    else {
+    alert('You have disabled location services');
+  }
 }
 
 function showPosition(position) {
@@ -197,6 +203,13 @@ function resetMap() {
   cyclingLayer.clearLayers();
   map.setView(singapore, 12);
 }
+
+// function resetMapLocation(userLocation) {
+//   searchLayer.clearLayers();
+//   sportClusterLayer.clearLayers();
+//   cyclingLayer.clearLayers();
+//   map.setView(userLocation, 12);
+// }
 
 function showMapPage() {
   let allPages = document.querySelectorAll(".page");
@@ -228,6 +241,14 @@ function showBuddyForm() {
 function closeBuddyForm() {
   document.querySelector("#page3").classList.remove("show")
   document.querySelector("#page3").classList.add("hidden");
+}
+
+function pauseVid() {
+  document.getElementById('background-video').pause();
+}
+
+function playVid() {
+  document.getElementById('background-video').play();
 }
 
 function resetRadioBtn(identifier) {

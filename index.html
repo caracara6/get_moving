@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;1,400;1,500&family=Taviraj:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -38,7 +42,7 @@
       <div id="page1" class="page">
         <section
           id="landingPage"
-          class="container-fluid d-flex justify-content-center align-items-center px-5"
+          class="container-fluid d-flex justify-content-center align-items-center px-3"
         >
 
         <video id="background-video" autoplay loop muted poster="">
@@ -47,9 +51,12 @@
 
 
           <div id="searchWrapper" class="flex-grow-1">
-            <div class="d-flex justify-content-center align-items-center">
-              <h1 class="display-1 mt-3">Get Sporty</h1>
-            </div>
+            <header class="d-flex flex-column justify-content-center align-items-center">
+              <h1 class="display-1 mt-3">Get Moving</h1>
+              <lead class="lead-1 mt-3">You don't have to go fast</lead>
+              <lead class="lead-2 mt-3">You just have to go</lead>
+
+            </header>
 
             <!-- search input starts -->
             <div class="d-flex justify-content-center align-items-center">
@@ -57,12 +64,11 @@
                 <input
                   type="text"
                   autocomplete="off"
-                  class="form-control mt-3 border border-3 border-danger"
+                  class="form-control mt-3"
                   id="searchInput"
-                  aria-describedby="emailHelp"
-                  placeholder="What's your favourite sport?"
+                  placeholder="What's gets you moving?"
                 />
-                <div id="searchValidation" class="form-text ms-1"><br/></div>
+                <p id="searchValidation" class="mt-1 ms-1 mb-0"><br></p>
               </div>
             </div>
 
@@ -72,10 +78,7 @@
                 id="landingSearchBtn"
                 class="btn"
                 </button>
-
-                <!-- btn-outline-danger border-danger -->
-              
-                Submit
+                Search
               </button>
 
               <!-- Button trigger surprise modal -->
@@ -83,6 +86,7 @@
                 type="button"
                 id="surpriseMeBtn"
                 class="btn ms-3"
+                onclick="pauseVid()"
                 data-bs-toggle="modal"
                 data-bs-target="#surpriseModal"
               >
@@ -98,20 +102,21 @@
                 aria-hidden="true"
               >
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
+                  <div class="modal-content shadow">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">
                         Why don't you try...
                       </h5>
                       <button
                         type="button"
-                        class="btn-close btn btn-outline-danger border border-3 border-danger"
+                        class="btn"
+                        onclick="playVid()"
                         data-bs-dismiss="modal"
                         aria-label="Close"
-                      ></button>
+                      ><i class="fa-solid fa-xmark"></i></button>
                     </div>
                     <div class="modal-body">
-                      <h6 id="randomSport"></h6>
+                      <lead id="randomSport"></lead>
                       <div><img id="randomSportImage" src="" alt="" /></div>
                     </div>
                     <div class="modal-footer">
@@ -119,6 +124,7 @@
                         type="button"
                         class="btn"
                         id="letsGoBtn"
+                        onclick="playVid()"
                         data-bs-dismiss="modal"
                       >
                         Let's Go
@@ -146,7 +152,7 @@
           <ul class="nav nav-pills rounded shadow" id="infoTab">
             <li class="nav-item sportsIcon mx-1">
               <i
-                class="fa-solid fa-circle-arrow-left my-3 color-change"
+                class="fa-solid shadow fa-circle-arrow-left my-3 color-change"
                 id="backBtn"
               ></i>
             </li>
@@ -191,27 +197,30 @@
           <!-- nav bar ends -->
 
           <!-- map search starts -->
-          <div class="input-group rounded" id="mapSearchBar">
+          <div id="mapSearchBar">
+          <div class="input-group rounded">
             <input
               type="search"
               id="mapSearchInput"
-              class="form-control border border-3 border-danger"
+              class="form-control"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="search-addon"
             />
             <span
-              class="input-group-text border border-3 border-danger"
+              class="input-group-text"
               id="mapSearchBtn"
             >
               <i class="fas fa-search"></i>
             </span>
             <span
-              class="input-group-text border border-3 border-danger"
+              class="input-group-text"
               id="locationSearchBtn"
             >
               <i class="fa-solid fa-location-crosshairs"></i>
             </span>
+          </div>
+          <p id="mapSearchValidation" class="my-0 ms-1"><br></p>
           </div>
           <!-- map search ends -->
           <div id="buddy-icon">
@@ -253,15 +262,15 @@
         <section class="container-fluid ht-100vh" id="buddy-page">
           <div class="row">
             <div class="col-3 d-none d-lg-block"></div>
-            <header class="col p-5 border border-danger d-flex">
-              <h1>Find a workout buddy</h1>
+            <header class="col px-5 pb-2 pt-3 border border-danger d-flex">
+              <h1 class="display-5"> Find a workout buddy</h1>
               <button 
               type="button"
               onclick="closeBuddyForm()"
               class="ms-auto btn-close btn btn-outline-danger border border-3 border-danger" 
               aria-label="Close">
             </button>
-            </header>
+          </header>
             <div class="col-3 d-none d-lg-block"></div>
           </div>
 
@@ -466,7 +475,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Terms and Conditions</h5>
             <button
               type="button"
               class="btn-close btn btn-outline-danger border border-3 border-danger"
@@ -474,7 +483,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">blah blah</div>
+          <div class="modal-body">We will not sell your data.</div>
           <div class="modal-footer">
             <button
               type="button"

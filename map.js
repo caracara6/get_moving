@@ -16,6 +16,20 @@ async function main() {
     map = initMap();
 
     window.addEventListener("DOMContentLoaded", function () {
+      document
+            .getElementById("singaporeMap")
+            .classList.remove("light-mode");
+          document.getElementById("singaporeMap").classList.add("dark-mode");
+
+          let colorChange = document.querySelectorAll(".color-change");
+          for (let c of colorChange) {
+            c.classList.remove("black");
+            c.classList.add("white");
+          }
+      document.querySelector("#buddyBtn").classList.remove("filter-black");
+          document.querySelector("#buddyBtn").classList.add("filter-white");
+
+
       map.on("baselayerchange", function (e) {
         if (e.layer.options.id == "mapbox/streets-v11") {
           document.getElementById("singaporeMap").classList.remove("dark-mode");
@@ -43,32 +57,30 @@ async function main() {
         }
       });
 
+      clearErrorMessage('#searchInput', 'keydown', '#searchValidation');
+
       let landingSearchBtn = document.querySelector("#landingSearchBtn");
       landingSearchBtn.addEventListener("click", async function () {
         //clear previous results
-        let allResults = document.querySelectorAll(".resultList");
-        for (let r of allResults) {
-          r.style.display = "none";
-        }
+        clearResults();
 
         // search validation
         let emptySearch = false;
-
         let searchInput = document.querySelector("#searchInput").value;
-
         if (!searchInput) {
           emptySearch = true;
         }
-
         if (emptySearch) {
           let validation = document.querySelector("#searchValidation");
           validation.innerHTML = "Please enter a valid search term";
         } else {
           resetMap();
-
           showMapPage();
-
           mapCenter = map.getBounds().getCenter();
+
+          // search results auto-dropdown for better UX
+          document.querySelector("#dropdownButton").classList.add("show");
+          document.querySelector("#infoTabSearchResults").classList.add("show");
 
           let response = await searchPlaces(
             mapCenter.lat,
@@ -77,24 +89,28 @@ async function main() {
             10
           );
 
-          // search results auto-dropdown for better UX
-          document.querySelector("#dropdownButton").classList.add("show");
-          document.querySelector("#infoTabSearchResults").classList.add("show");
+          if (response.results.length == 0){
+            let searchResultElement = document.querySelector("#infoTabSearchResults");
+            let noResultElement = document.createElement('li');
+            noResultElement.className = "resultList";
+            noResultElement.innerHTML = "Try searching for something else!"
+            searchResultElement.appendChild(noResultElement);
+          }
 
+          
           console.log(response.results);
 
-          plotSearchCoordinates(response.results, "icons/search.svg");
-          searchLayer.addTo(map);
+          plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
+          // searchLayer.addTo(map);
         }
       });
+
+      clearErrorMessage('#mapSearchInput', 'keydown', '#mapSearchValidation');
 
       let mapSearchBtn = document.querySelector("#mapSearchBtn");
       mapSearchBtn.addEventListener("click", async function () {
         //clear previous results
-        let allResults = document.querySelectorAll(".resultList");
-        for (let r of allResults) {
-          r.style.display = "none";
-        }
+        clearResults();
 
         // search validation
         let emptySearch = false;
@@ -106,7 +122,7 @@ async function main() {
         }
 
         if (emptySearch) {
-          let validation = document.querySelector("#searchValidation");
+          let validation = document.querySelector("#mapSearchValidation");
           validation.innerHTML = "Please enter a valid search term";
         } else {
           resetMap();
@@ -126,18 +142,15 @@ async function main() {
 
           // console.log(response.results);
 
-          plotSearchCoordinates(response.results, "icons/search.svg");
-          searchLayer.addTo(map);
+          plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
+          // searchLayer.addTo(map);
         }
       });
 
       let locationSearchBtn = document.querySelector("#locationSearchBtn");
       locationSearchBtn.addEventListener("click", async function () {
         //clear previous results
-        let allResults = document.querySelectorAll(".resultList");
-        for (let r of allResults) {
-          r.style.display = "none";
-        }
+        clearResults();
 
         // search validation
         let emptySearch = false;
@@ -149,12 +162,12 @@ async function main() {
         }
 
         if (emptySearch) {
-          let validation = document.querySelector("#searchValidation");
+          let validation = document.querySelector("#mapSearchValidation");
           validation.innerHTML = "Please enter a valid search term";
         } else {
-          resetMap();
           getLocation();
-          // console.log(userLocation[0]);
+          resetMap();
+          console.log(userLocation);
           // console.log(searchInput);
 
           let response = await searchPlaces(
@@ -168,8 +181,8 @@ async function main() {
           document.querySelector("#dropdownButton").classList.add("show");
           document.querySelector("#infoTabSearchResults").classList.add("show");
 
-          plotSearchCoordinates(response.results, "icons/search.svg");
-          searchLayer.addTo(map);
+          plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
+          // searchLayer.addTo(map);
         }
       });
 
@@ -186,11 +199,13 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "gym");
-        plotSportsCoordinates(response.results, "icons/dumbbell.svg");
+        plotSearchCoordinates(response.results, "icons/dumbbell.svg", sportClusterLayer);
+        // sportClusterLayer.addTo(map);
       });
 
       let basketballBtn = document.querySelector("#basketballBtn");
       basketballBtn.addEventListener("click", async function () {
+        clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(
@@ -198,19 +213,22 @@ async function main() {
           mapCenter.lng,
           "basketball"
         );
-        plotSportsCoordinates(response.results, "icons/basketball.svg");
+        plotSearchCoordinates(response.results, "icons/basketball.svg", sportClusterLayer);
       });
 
       let golfBtn = document.querySelector("#golfBtn");
       golfBtn.addEventListener("click", async function () {
+                clearResults();
+
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "golf");
-        plotSportsCoordinates(response.results, "icons/golf.svg");
+        plotSearchCoordinates(response.results, "icons/golf.svg", sportClusterLayer);
       });
 
       let bowlingBtn = document.querySelector("#bowlingBtn");
       bowlingBtn.addEventListener("click", async function () {
+                clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(
@@ -218,11 +236,12 @@ async function main() {
           mapCenter.lng,
           "bowling"
         );
-        plotSportsCoordinates(response.results, "icons/bowling.svg");
+        plotSearchCoordinates(response.results, "icons/bowling.svg", sportClusterLayer);
       });
 
       let swimmingBtn = document.querySelector("#swimmingBtn");
       swimmingBtn.addEventListener("click", async function () {
+                clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(
@@ -230,11 +249,12 @@ async function main() {
           mapCenter.lng,
           "swimming"
         );
-        plotSportsCoordinates(response.results, "icons/swimming.svg");
+        plotSearchCoordinates(response.results, "icons/swimming.svg", sportClusterLayer);
       });
 
       let volleyballBtn = document.querySelector("#volleyballBtn");
       volleyballBtn.addEventListener("click", async function () {
+        clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(
@@ -242,11 +262,12 @@ async function main() {
           mapCenter.lng,
           "volleyball"
         );
-        plotSportsCoordinates(response.results, "icons/volleyball.svg");
+        plotSearchCoordinates(response.results, "icons/volleyball.svg", sportClusterLayer);
       });
 
       let cyclingBtn = document.querySelector("#cyclingBtn");
       cyclingBtn.addEventListener("click", async function () {
+        clearResults();
         resetMap();
         showCyclingPath();
         cyclingLayer.addTo(map);
@@ -256,13 +277,12 @@ async function main() {
 
       let surpriseMeBtn = document.querySelector("#surpriseMeBtn");
       surpriseMeBtn.addEventListener("click", function () {
-        // generateRandomSport();
         randomSportSearch = generateRandomSport();
-        // console.log(randomSportSearch)
       });
 
       let letsGoBtn = document.querySelector("#letsGoBtn");
       letsGoBtn.addEventListener("click", async function () {
+                clearResults();
         resetMap();
         showMapPage();
 
@@ -286,8 +306,7 @@ async function main() {
         document.querySelector("#dropdownButton").classList.add("show");
         document.querySelector("#infoTabSearchResults").classList.add("show");
 
-        plotSearchCoordinates(response.results, "icons/search.svg");
-        searchLayer.addTo(map);
+        plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
       });
 
       let buddyBtn = document.querySelector("#buddyBtn");
@@ -318,36 +337,10 @@ async function main() {
       submitBtn.addEventListener("click", function () {
 
         //flags
-
         let flag = false;
-
-        // let nameNotProvided = false;
-        // let nameTooShort = false;
-        // let noDOBProvided = false;
-        // let ageTooYoung = false;
-        // let ageTooOld = false;
-        // let genderNotProvided = false;
-        // let emailNotProvided = false;
-        // let emailInvalid = false;
-        // let noActivitySelected = false;
-        // let noOthersSpecified = false;
-        // let tNcUnchecked = false;
-
-        // flags = [nameNotProvided, nameTooShort, noDOBProvided, ageTooYoung,
-        //             ageTooOld, genderNotProvided, emailNotProvided, emailInvalid,
-        //             noActivitySelected, noOthersSpecified, tNcUnchecked];
-
-        // console.log(flags)
-
 
         // name error
         let name = document.getElementById("name").value;
-        
-        // if (!name) {
-        //   flag = true;
-        // } else if (name.length < 3) {
-        //   nameTooShort = true;
-        // }
 
         if (!name || name.length < 3) {
           if (!name) {
@@ -471,19 +464,8 @@ async function main() {
           document.querySelector("#tNcValidation").innerHTML =
             "<span>Please agree to the terms and conditions</span>";
         }
-
-        // console.log(genderNotProvided)
-        // console.log(tNcUnchecked)
-
-        // for(let flag of flags){
-        //   console.log(flag);
-        // }
-
-        //submit response
-        // let errors = flags.filter(flag => flag == true);
-        // console.log(errors)
-        if (flag == false){       //if no errors
-          
+        //if no errors
+        if (flag == false){       
           document.querySelector('#submitResponse').innerHTML = `<span>We have received your response, and will contact you if there is a match!</span>`
           setTimeout(closeBuddyForm, 4000);
         } 
@@ -544,7 +526,7 @@ async function main() {
           "pk.eyJ1IjoiY2FyYWNhcmE2IiwiYSI6ImNrenV6anhiMjdyamYyd25mYXB3N2V6aGUifQ._MiXk72eEw378aB0cJnNng",
       }
     );
-    lightMode.addTo(map);
+    
 
     // Add dark layer
     darkMode = L.tileLayer(
@@ -560,6 +542,7 @@ async function main() {
           "pk.eyJ1IjoiY2FyYWNhcmE2IiwiYSI6ImNrenV6anhiMjdyamYyd25mYXB3N2V6aGUifQ._MiXk72eEw378aB0cJnNng",
       }
     );
+    darkMode.addTo(map);
     // darkMode = L.tileLayer(
     //   "https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}",
     //   {

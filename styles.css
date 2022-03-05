@@ -1,3 +1,24 @@
+@font-face {
+  src: url(fonts/Artega.otf);
+  font-family: artega;
+  
+}
+
+h1 {
+  font-family: artega;
+  color: white;
+}
+
+#page3 h1 {
+  font-size: 2rem;
+}
+p {
+  color: white;
+  font-size: .9rem;
+  font-family: 'Taviraj', serif;
+  font-weight: 200;
+}
+
 body {
   width: 100%;
   height: 100%;
@@ -35,29 +56,52 @@ body {
   transition: transform 1s;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: red;
+::placeholder {
+  color: white!important;
+}
+
+#mapSearchBar ::placeholder{
+  color: red !important;
 }
 
 .leaflet-control-container .fa-solid{
   font-size: 1rem;
 }
 
+header .lead-1 {
+  font-family: 'Taviraj', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: white;
+}
+header .lead-2 {
+  font-family: 'Taviraj', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+}
+
 #searchInput{
   width: 20rem;
   color: red;
   background-color:rgba(0,0,0,0);
+  font-family: 'Roboto Mono', monospace;
+  border-color: rgba(255, 0, 0, 0.5);
+  border-width: 2px;
 }
 
 #mapSearchInput, #locationSearchBtn, #mapSearchBtn{
   color: red;
   background-color:rgba(0,0,0,0);
+  font-family: 'Roboto Mono', monospace;
+  border-color: rgba(255, 0, 0, 0.5);
+  border-width: 2px;
 }
 
 #mapSearchInput:focus, #searchInput:focus{
-  background-color:rgba(255, 0, 170, 0.281) !important;
+  background-color:rgba(255, 0, 0, 0.4) !important;
   color: white;
-  font-weight: 900;
+  /* font-weight: 900; */
 }
 #locationSearchBtn:hover, #mapSearchBtn:hover{
   background-color:rgba(255,0,0,0.5) !important;
@@ -67,24 +111,30 @@ body {
 button{
   background-color:rgba(0, 0, 0, 0);
   border-style: solid;
-  border-color: rgba(255, 0, 170, 0.281)!important;
+  border-color: rgba(255, 0, 0, 0.5)!important;
   font-weight: 500;
   color: white!important;
   border-width: 2px!important;
-  
-
+  font-family: 'Roboto Mono', monospace;
 }
-button:hover{
-  background-color:rgba(255, 0, 170, 0.281);
+
+button:hover {
+  background-color:rgba(255, 0, 0, 0.4) !important;
+}
+.modal-content{
+  background-color:rgba(0, 0, 0, 0.8);
+}
+
+.modal-title{
   color: white;
-  
+  font-family: 'Taviraj', serif;
 }
-
-
-/* 
-button:hover, {
-  background-color:rgba(255,0,0,0.5) !important;
-} */
+.modal-body{
+  color: white;
+  text-align: center;
+  font-family: 'Taviraj', serif;
+  font-size: 3rem;
+}
 
 #randomSportImage {
   width: 100%;
@@ -93,10 +143,6 @@ button:hover, {
 #landingPage {
   height: 100vh;
   position:relative;
-  /* background-image: url("images/swimming.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover; */
 }
 
 #background-video {
@@ -120,10 +166,12 @@ button:hover, {
 #infoTab {
   position: absolute;
   top: 0.9rem;
-  right: 2rem;
+  right: 0.7rem;
   z-index: 314159;
-  background-color: rgba(250, 52, 52, 0.445);
+  background-color: rgba(250, 52, 52, 0.6);
   font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;;
 }
 
 #infoTabSearchResults {
@@ -131,6 +179,7 @@ button:hover, {
   inset: 0px auto auto 0px;
   margin: 0px;
   transform: translate3d(-57px, 42px, 0px);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #dropdownButton{
@@ -140,6 +189,7 @@ button:hover, {
 .resultList {
   padding: 0.25rem 0.6rem;
   font-size: 0.75rem;
+  font-weight: 700;
   box-sizing: border-box;
 }
 
@@ -150,7 +200,7 @@ button:hover, {
 
 #mapSearchBar {
   position: absolute;
-  bottom: 0.9rem;
+  bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -165,7 +215,7 @@ button:hover, {
 
 #buddy-icon {
   position: absolute;
-  bottom: 5rem;
+  bottom: 6rem;
   left: 2rem;
   z-index: 314159;
 }
