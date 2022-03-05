@@ -78,10 +78,6 @@ async function main() {
           showMapPage();
           mapCenter = map.getBounds().getCenter();
 
-          // search results auto-dropdown for better UX
-          document.querySelector("#dropdownButton").classList.add("show");
-          document.querySelector("#infoTabSearchResults").classList.add("show");
-
           let response = await searchPlaces(
             mapCenter.lat,
             mapCenter.lng,
@@ -90,18 +86,14 @@ async function main() {
           );
 
           if (response.results.length == 0){
-            let searchResultElement = document.querySelector("#infoTabSearchResults");
-            let noResultElement = document.createElement('li');
-            noResultElement.className = "resultList";
-            noResultElement.innerHTML = "Try searching for something else!"
-            searchResultElement.appendChild(noResultElement);
+            noResults();
           }
 
-          
-          console.log(response.results);
+          // search results auto-dropdown for better UX
+          document.querySelector("#dropdownButton").classList.add("show");
+          document.querySelector("#infoTabSearchResults").classList.add("show");
 
           plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
-          // searchLayer.addTo(map);
         }
       });
 
@@ -136,14 +128,15 @@ async function main() {
             8
           );
 
+          if (response.results.length == 0){
+            noResults();
+          }
+
           // search results auto-dropdown for better UX
           document.querySelector("#dropdownButton").classList.add("show");
           document.querySelector("#infoTabSearchResults").classList.add("show");
 
-          // console.log(response.results);
-
           plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
-          // searchLayer.addTo(map);
         }
       });
 
@@ -167,8 +160,6 @@ async function main() {
         } else {
           getLocation();
           resetMap();
-          console.log(userLocation);
-          // console.log(searchInput);
 
           let response = await searchPlaces(
             userLocation[0],
@@ -177,25 +168,29 @@ async function main() {
             8
           );
 
+          if (response.results.length == 0){
+            noResults();
+          }
+
           // search results auto-dropdown for better UX
           document.querySelector("#dropdownButton").classList.add("show");
           document.querySelector("#infoTabSearchResults").classList.add("show");
 
           plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
-          // searchLayer.addTo(map);
         }
       });
 
       let backBtn = document.querySelector("#backBtn");
       backBtn.addEventListener("click", function () {
         let validation = document.querySelector("#searchValidation");
-        validation.innerHTML = "<br>";
+        validation.innerHTML = "<br>"
 
         showLandingPage();
       });
 
       let gymBtn = document.querySelector("#gymBtn");
       gymBtn.addEventListener("click", async function () {
+        clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "gym");
@@ -218,8 +213,7 @@ async function main() {
 
       let golfBtn = document.querySelector("#golfBtn");
       golfBtn.addEventListener("click", async function () {
-                clearResults();
-
+        clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "golf");
@@ -228,7 +222,7 @@ async function main() {
 
       let bowlingBtn = document.querySelector("#bowlingBtn");
       bowlingBtn.addEventListener("click", async function () {
-                clearResults();
+        clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(
@@ -241,7 +235,7 @@ async function main() {
 
       let swimmingBtn = document.querySelector("#swimmingBtn");
       swimmingBtn.addEventListener("click", async function () {
-                clearResults();
+        clearResults();
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(
@@ -282,7 +276,7 @@ async function main() {
 
       let letsGoBtn = document.querySelector("#letsGoBtn");
       letsGoBtn.addEventListener("click", async function () {
-                clearResults();
+        clearResults();
         resetMap();
         showMapPage();
 

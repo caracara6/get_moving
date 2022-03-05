@@ -171,8 +171,12 @@ button:hover {
   background-color: rgba(250, 52, 52, 0.6);
   font-size: 1rem;
   font-weight: 700;
-  font-family: 'Roboto Mono', monospace;;
+  font-family: 'Roboto Mono', monospace;
 }
+
+/* #infoTab .fa-solid{
+  position: absolute;
+} */
 
 #infoTabSearchResults {
   position: absolute;

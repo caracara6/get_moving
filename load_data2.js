@@ -45,7 +45,7 @@ async function searchSport(lat, lng, sport) {
       query: sport,
       radius: 25000,
       categories: 18000,
-      limit: 20,
+      limit: 10,
     },
     headers: {
       Accept: "application/json",
@@ -69,18 +69,17 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
 
     let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
     
-    let resultPhotoUrl = null;
-
-    let resultPhoto = await searchPhoto(eachResult.fsq_id);
-
-    if (resultPhoto.length == 0) {
-      continue;
-    } else {
+    let resultPhotoUrl = 'images/default.jpg';
+    let resultPhoto;
+    try {
+    resultPhoto = await searchPhoto(eachResult.fsq_id);
+    } catch(e) {
+      resultPhoto = [];
+    } finally{
       resultPhoto.forEach((result) => {
         resultPhotoUrl = result.prefix + "original" + result.suffix;
       });
-    }
-
+    
     resultMarker.bindPopup(`<div>
       <div>
       <ul>
@@ -89,7 +88,7 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
       <li><span>${eachResult.location.post_town}</span></li>
       </ul>
       </div>
-      <div class="my-2"><img class="popupPhoto" src='${resultPhotoUrl}'/></div>
+      <div class="my-2"><img class="popupPhoto rounded-3" src='${resultPhotoUrl}'/></div>
             </div>`);
 
     resultMarker.addTo(layer);
@@ -102,15 +101,16 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
     resultElement.className = "resultList";
 
     resultElement.addEventListener("click", function () {
-      map.flyTo(resultCoordinate, 16);
+      map.flyTo(resultCoordinate, 14);
       resultMarker.openPopup();
     });
     resultMarker.addEventListener("click", function () {
-      map.flyTo(resultCoordinate, 16);
+      map.flyTo(resultCoordinate, 14);
       resultMarker.openPopup();
     });
 
     searchResultElement.appendChild(resultElement);
+    } 
   }
   layer.addTo(map)
 }
