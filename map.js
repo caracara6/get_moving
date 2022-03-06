@@ -89,9 +89,7 @@ async function main() {
             noResults();
           }
 
-          // search results auto-dropdown for better UX
-          document.querySelector("#dropdownButton").classList.add("show");
-          document.querySelector("#infoTabSearchResults").classList.add("show");
+          showResults();
 
           plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
         }
@@ -132,9 +130,7 @@ async function main() {
             noResults();
           }
 
-          // search results auto-dropdown for better UX
-          document.querySelector("#dropdownButton").classList.add("show");
-          document.querySelector("#infoTabSearchResults").classList.add("show");
+          showResults();
 
           plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
         }
@@ -172,9 +168,7 @@ async function main() {
             noResults();
           }
 
-          // search results auto-dropdown for better UX
-          document.querySelector("#dropdownButton").classList.add("show");
-          document.querySelector("#infoTabSearchResults").classList.add("show");
+          showResults();
 
           plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
         }
@@ -195,7 +189,7 @@ async function main() {
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "gym");
         showResults();
-        
+
         plotSearchCoordinates(response.results, "icons/dumbbell.svg", sportClusterLayer);
       });
 

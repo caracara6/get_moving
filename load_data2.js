@@ -243,7 +243,8 @@ function resetTextInput(identifier){
 let bottom = 0;
 let isJumping = false;
 function jump(el){
-  if(isJumping) return
+  if(isJumping)
+  return
   let upTimer = setInterval(function(){
     if(bottom >= 8){
       clearInterval(upTimer);
