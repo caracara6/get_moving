@@ -3,10 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;1,600;1,400;1,500&family=Taviraj:wght@200;300;400;500&display=swap" rel="stylesheet">
-    
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -25,6 +21,9 @@
       src="https://kit.fontawesome.com/077919a160.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,600;1,400;1,500&family=Taviraj:wght@200;300;400;500&display=swap" rel="stylesheet">
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -188,7 +187,6 @@
               <ul
                 class="dropdown-menu"
                 id="infoTabSearchResults"
-                data-popper-placement="bottom-end"
               ></ul>
             </li>
           </ul>
@@ -244,7 +242,7 @@
               <h1> Find a workout buddy</h1>
               <button 
               type="button"
-              onclick="closeBuddyForm()"
+              onclick="closeBuddyForm(), resetFormError()"
               class="ms-auto btn align-self-start" 
               aria-label="Close">
               <i class="fa-solid fa-xmark"></i>
@@ -267,7 +265,7 @@
                       name="name"
                       id="name"
                     />
-                    <div id="nameValidation"><br></div>
+                    <div id="nameValidation" class="errorMsg"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -279,7 +277,7 @@
                       id="dob"
                       name="dob"
                     />
-                    <div id="ageValidation"><br></div>
+                    <div id="ageValidation" class="errorMsg"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -309,7 +307,7 @@
                         >Female</label
                       >
                     </div>
-                    <div id="genderValidation"><br></div>
+                    <div id="genderValidation" class="errorMsg"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -322,7 +320,7 @@
                       name="email"
                       id="email"
                     />
-                    <div id="emailValidation"><br></div>
+                    <div id="emailValidation" class="errorMsg"><br></div>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -393,7 +391,7 @@
                         id="whatOthersInput"
                       />
                     </div>
-                    <div id="activityValidation"><br></div>
+                    <div id="activityValidation" class="errorMsg"><br></div>
                   </div>
                
                 </div>
@@ -421,19 +419,17 @@
                         >
                       </label>
                     </div>
-                    <div id="tNcValidation"><br></div>
-                    <input
-                  type="submit"
-                  class="btn my-3"
-                  id="submitBtn"
-                />
-                    <div id="submitResponse"><br></div>
-
-
+                    <div id="tNcValidation" class="errorMsg"><br></div>
+                <button
+                type="submit"
+                id="submitBtn"
+                class="btn my-3"
+                </button>
+                Submit
+              </button>
+                    <div id="submitResponse" class="errorMsg"><br></div>
                   </div>
                 </div>
-
-                
               </div>
             </div>
             <div class="col-3 d-none d-lg-block"></div>

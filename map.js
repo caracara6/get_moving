@@ -301,9 +301,7 @@ async function main() {
           8
         );
 
-        // search results auto-dropdown for better UX
-        document.querySelector("#dropdownButton").classList.add("show");
-        document.querySelector("#infoTabSearchResults").classList.add("show");
+        showResults();
 
         plotSearchCoordinates(response.results, "icons/search.svg", searchLayer);
       });
@@ -342,63 +340,64 @@ async function main() {
       submitBtn.addEventListener("click", function () {
 
         //flags
-        let flag = false;
+        let flag = 0;
 
         // name error
         let name = document.getElementById("name").value;
 
         if (!name || name.length < 3) {
           if (!name) {
-            flag = true;
+            flag += 1;
             document.getElementById("nameValidation").innerHTML =
               "<span>Please enter your name</span>";
           }
           if (name.length < 3) {
-            flag = true;
+            flag +=1;
             document.getElementById("nameValidation").innerHTML =
               "<span>Please enter a valid name</span>";
           }
-        }
+        } 
 
         // age error
         let dob = new Date(document.getElementById("dob").value);
+
+        let birthYear = dob.getFullYear();
+        let birthMonth = dob.getMonth();
+        let birthDay = dob.getDate();
 
         let today = new Date();
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth();
         let currentDay = today.getDate();
 
-        let birthYear = dob.getFullYear();
-        let birthMonth = dob.getMonth();
-        let birthDay = dob.getDate();
-
         let ageYear = currentYear - birthYear;
         let ageMonth = currentMonth - birthMonth;
         let ageDay = currentDay - birthDay;
 
         if (dob == "Invalid Date") {
+          console.log(dob);
           flag = true;
           document.getElementById("ageValidation").innerHTML =
             "<span>Please enter your age</span>";
         } 
-        if (ageYear > 100) {
-          flag = true;
-          document.getElementById("ageValidation").innerHTML =
-            "<span>You can't be older than 100</span>";
-        } 
-        // if (ageYear == 18 && ageMonth <= 0 && ageDay <= 0) {
-        //   flag = true;
-        //   document.getElementById("ageValidation").innerHTML =
-        //     "<span>You have to be older than 18</span>";
-        // }
+
         if (ageMonth < 0 || (ageMonth == 0 && ageDay < 0)) {
           ageYear = parseInt(ageYear) - 1;
         }
-        // if (ageYear < 18){
-        //   flag = true;
-        //   document.getElementById("ageValidation").innerHTML =
-        //     "<span>You have to be older than 18</span>";
-        // }
+
+        if (ageYear > 100) {
+          flag += 1;
+          document.getElementById("ageValidation").innerHTML =
+            "<span>You can't be older than 100</span>";
+        } else if (ageYear == 18 && ageMonth <= 0 && ageDay <= 0) {
+          flag += 1;
+          document.getElementById("ageValidation").innerHTML =
+            "<span>You have to be older than 18</span>";
+        }  else if (ageYear < 18){
+          flag += 1;
+          document.getElementById("ageValidation").innerHTML =
+            "<span>You have to be older than 18</span>"
+        }
 
         // gender error
         let gender = null;
@@ -409,33 +408,26 @@ async function main() {
           }
         }
         if (gender == null) {
-          flag = true;
+          flag += 1;
           document.getElementById("genderValidation").innerHTML =
-            "<span>Please select your gender</span>";
+            "<span>Please select your gender</span>"
         }
 
         //email error
-        function validateEmail(email) {
-          let validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-          if (email.match(validEmail)) {
-            flag = false;
-            document.querySelector("#emailValidation").innerHTML = '<br>'
-            return true;
-          } else if(!email){
-            flag = true;
-            document.querySelector("#emailValidation").innerHTML =
-              "<span>Please enter your email</span>";
-          }
-          else {
-            flag = true;
-            document.querySelector("#emailValidation").innerHTML =
-              "<span>Please enter a valid email</span>";
-            return false;
-          }
-        }
-
         let email = document.getElementById("email").value;
-        validateEmail(email);
+
+        let validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (email.match(validEmail)) {
+          document.querySelector("#emailValidation").innerHTML = '<br>'
+        } else if(!email){
+          flag += 1;
+          document.querySelector("#emailValidation").innerHTML =
+            "<span>Please enter your email</span>"
+        } else {
+          flag += 1;
+          document.querySelector("#emailValidation").innerHTML =
+            "<span>Please enter a valid email</span>"
+        }
 
         //activities error
         let allActivities = document.getElementsByClassName("activity");
@@ -447,7 +439,7 @@ async function main() {
         }
 
         if (selectedActivities.length == 0) {
-          flag = true;
+          flag += 1;
           document.querySelector(
             "#activityValidation"
           ).innerHTML = `<span>Please indicate at least one activity</span>`;
@@ -456,7 +448,7 @@ async function main() {
         if(document.querySelector('#othersCheckbox').checked==true){
           let whatOthers = document.querySelector("#whatOthersInput").value;
           if (!whatOthers) {
-            flag = true;
+            flag += 1;
           document.querySelector("#activityValidation").innerHTML =
             "<span>Please let us know what activity you prefer</span>";
           }
@@ -465,12 +457,13 @@ async function main() {
         //terms and conditions error
         let tNcCheckbox = document.querySelector("#tNcCheckbox");
         if (tNcCheckbox.checked == false) {
-          flag = true;
+          flag += 1;
           document.querySelector("#tNcValidation").innerHTML =
             "<span>Please agree to the terms and conditions</span>";
         }
         //if no errors
-        if (flag == false){       
+        console.log('ending', flag);
+        if (flag == 0){       
           document.querySelector('#submitResponse').innerHTML = `<span>We have received your response, and will contact you if there is a match!</span>`
           setTimeout(closeBuddyForm, 4000);
         } 

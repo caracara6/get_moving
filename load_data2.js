@@ -77,7 +77,7 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
       resultPhoto = [];
     } finally{
       resultPhoto.forEach((result) => {
-        resultPhotoUrl = result.prefix + "original" + result.suffix;
+        resultPhotoUrl = result.prefix + "200x200" + result.suffix;
       });
     
     resultMarker.bindPopup(`<div>
@@ -101,11 +101,11 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
     resultElement.className = "resultList";
 
     resultElement.addEventListener("click", function () {
-      map.flyTo(resultCoordinate, 14);
+      map.flyTo(resultCoordinate, 18);
       resultMarker.openPopup();
     });
     resultMarker.addEventListener("click", function () {
-      map.flyTo(resultCoordinate, 14);
+      map.flyTo(resultCoordinate, 18);
       resultMarker.openPopup();
     });
 
@@ -172,6 +172,12 @@ function resetMap() {
 function showResults(){
   document.querySelector("#dropdownButton").classList.add("show");
   document.querySelector("#infoTabSearchResults").classList.add("show");
+
+  if(window.matchMedia('(min-width: 992px)').matches){
+    document.querySelector("#infoTabSearchResults").classList.add("dropdownPositionMin992");
+  } else {
+    document.querySelector("#infoTabSearchResults").classList.add("dropdownPosition");
+  }
 }
 
 function showMapPage() {
@@ -237,6 +243,13 @@ function resetTextInput(identifier){
   let allTextboxes = document.querySelectorAll(`input[type=${identifier}]`);
   for(let t of allTextboxes){
     t.value = ""
+  }
+}
+
+function resetFormError() {
+  let allErrorMsg = document.querySelectorAll('.errorMsg');
+  for(let e of allErrorMsg){
+    e.innerHTML = '<br>'
   }
 }
 
