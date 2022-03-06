@@ -116,7 +116,7 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
 }
 
 async function showCyclingPath() {
-  let response = await axios.get("cycling.geojson");
+  let response = await axios.get("data/cycling.geojson");
   let showCyclingLayer = L.geoJson(response.data, {
     onEachFeature: function (feature, layer) {
       let tempDiv = document.createElement("div");

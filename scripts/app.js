@@ -269,6 +269,11 @@ async function main() {
         clearResults();
         resetMap();
         showCyclingPath();
+        let searchResultElement = document.querySelector("#infoTabSearchResults");
+        let informCyclingElement = document.createElement('li');
+        informCyclingElement.className='resultList';
+        informCyclingElement.innerHTML = "Explore the cycling paths around Singapore";
+        searchResultElement.appendChild(informCyclingElement);
         cyclingLayer.addTo(map);
       });
 
@@ -375,7 +380,6 @@ async function main() {
         let ageDay = currentDay - birthDay;
 
         if (dob == "Invalid Date") {
-          console.log(dob);
           flag = true;
           document.getElementById("ageValidation").innerHTML =
             "<span>Please enter your age</span>";
@@ -462,7 +466,6 @@ async function main() {
             "<span>Please agree to the terms and conditions</span>";
         }
         //if no errors
-        console.log('ending', flag);
         if (flag == 0){       
           document.querySelector('#submitResponse').innerHTML = `<span>We have received your response, and will contact you if there is a match!</span>`
           setTimeout(closeBuddyForm, 4000);
@@ -500,7 +503,6 @@ async function main() {
           document.querySelector('#tNcValidation').innerHTML='<br>'
         }
       })
-
     });
   }
 
@@ -524,7 +526,6 @@ async function main() {
           "pk.eyJ1IjoiY2FyYWNhcmE2IiwiYSI6ImNrenV6anhiMjdyamYyd25mYXB3N2V6aGUifQ._MiXk72eEw378aB0cJnNng",
       }
     );
-    
 
     // Add dark layer
     darkMode = L.tileLayer(
@@ -542,10 +543,6 @@ async function main() {
     );
     darkMode.addTo(map);
 
-    let userMarker = L.marker(singapore, { draggable: true });
-    let popup = userMarker.bindPopup("Hello");
-    popup.addTo(map);
-
     // Set up base layers
     baseMaps = {
       '<i class="fa-solid fa-sun"></i>': lightMode,
@@ -555,7 +552,6 @@ async function main() {
     overlays = {
     };
 
-    // {collapsed=false}??
     L.control
       .layers(baseMaps, overlays, { position: "bottomright" })
       .addTo(map);
