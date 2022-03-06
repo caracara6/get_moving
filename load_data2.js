@@ -169,13 +169,10 @@ function resetMap() {
   cyclingLayer.clearLayers();
   map.setView(singapore, 12);
 }
-
-// function resetMapLocation(userLocation) {
-//   searchLayer.clearLayers();
-//   sportClusterLayer.clearLayers();
-//   cyclingLayer.clearLayers();
-//   map.setView(userLocation, 12);
-// }
+function showResults(){
+  document.querySelector("#dropdownButton").classList.add("show");
+  document.querySelector("#infoTabSearchResults").classList.add("show");
+}
 
 function showMapPage() {
   let allPages = document.querySelectorAll(".page");
@@ -243,30 +240,24 @@ function resetTextInput(identifier){
   }
 }
 
+let bottom = 0;
+let isJumping = false;
 function jump(el){
-  document.querySelector(el).classList.add('fa-bounce');
-  // setTimeout(document.querySelector(el).classList.remove('fa-bounce'), 2000);
+  if(isJumping) return
+  let upTimer = setInterval(function(){
+    if(bottom >= 8){
+      clearInterval(upTimer);
+      let downTimer = setInterval(function() {
+        if(bottom <= 2){
+          clearInterval(downTimer);
+          isJumping = false;
+        }
+        bottom -=2;
+        document.querySelector(el).style.bottom = bottom + 'px';
+      }, 15)
+    }
+    isJumping = true;
+    bottom += 2;
+    document.querySelector(el).style.bottom = bottom + 'px';
+  }, 15)
 }
-
-// for (let eachResult of response.results) {
-//   let resultCoordinate = [
-//     eachResult.geocodes.main.latitude,
-//     eachResult.geocodes.main.longitude,
-//   ];
-
-//   let resultIcon = L.icon({
-//     iconUrl: "icons/dumbbell.svg",
-//     iconSize: [35, 35],
-//   });
-//   let resultMarker = L.marker(resultCoordinate, { icon: resultIcon });
-//   resultMarker.bindPopup(`<div>
-//     <div>${eachResult.name}</div>
-//     <button type="button" class="btn btn-primary">Directions</button>
-//     </div>`);
-//   resultMarker.addTo(sportClusterLayer);
-//   sportClusterLayer.addTo(map);
-//   resultMarker.addEventListener("click", function () {
-//     map.flyTo(resultCoordinate, 16);
-//     resultMarker.openPopup();
-//   });
-// }

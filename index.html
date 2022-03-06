@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;1,400;1,500&family=Taviraj:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;1,600;1,400;1,500&family=Taviraj:wght@200;300;400;500&display=swap" rel="stylesheet">
     
     <link
       rel="stylesheet"
@@ -66,7 +66,7 @@
                   autocomplete="off"
                   class="form-control mt-3"
                   id="searchInput"
-                  placeholder="What's gets you moving?"
+                  placeholder="What gets you moving?"
                 />
                 <p id="searchValidation" class="mt-1 ms-1 mb-0"><br></p>
               </div>
@@ -145,35 +145,35 @@
       <div id="page2" class="page hidden">
         <section class="container-fluid" id="mapPage">
           <!-- map starts -->
-          <div id="singaporeMap"></div>
+          <div id="singaporeMap" class="ht-100vh"></div>
           <!-- map ends -->
 
           <!-- nav bar starts -->
-          <nav id="infoTab">
-          <ul class="nav nav-pills rounded shadow ">
+          <nav id="infoTab" class="rounded shadow">
+          <ul class="nav nav-pills icons-wrapper">
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-circle-arrow-left my-3 color-change" id="backBtn"></i>
+              <i class="fa-solid fa-circle-arrow-left my-3 color-change" id="backBtn" onclick="jump('#backBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-dumbbell my-3 color-change" id="gymBtn"></i>
+              <i class="fa-solid fa-dumbbell my-3 color-change" id="gymBtn" onclick="jump('#gymBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-basketball my-3 color-change" id="basketballBtn"></i>
+              <i class="fa-solid fa-basketball my-3 color-change" id="basketballBtn" onclick="jump('#basketballBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-golf-ball-tee my-3 color-change" id="golfBtn"></i>
+              <i class="fa-solid fa-golf-ball-tee my-3 color-change" id="golfBtn" onclick="jump('#golfBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-bowling-ball my-3 color-change" id="bowlingBtn"></i>
+              <i class="fa-solid fa-bowling-ball my-3 color-change" id="bowlingBtn" onclick="jump('#bowlingBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-person-swimming my-3 color-change" id="swimmingBtn"></i>
+              <i class="fa-solid fa-person-swimming my-3 color-change" id="swimmingBtn" onclick="jump('#swimmingBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-volleyball my-3 color-change" id="volleyballBtn"></i>
+              <i class="fa-solid fa-volleyball my-3 color-change" id="volleyballBtn" onclick="jump('#volleyballBtn')"></i>
             </li>
             <li class="nav-item sportsIcon mx-1">
-              <i class="fa-solid fa-person-biking my-3 color-change" id="cyclingBtn"></i>
+              <i class="fa-solid fa-person-biking my-3 color-change" id="cyclingBtn" onclick="jump('#cyclingBtn')"></i>
             </li>
 
             <li class="nav-item dropdown">
@@ -236,24 +236,26 @@
 
       <!-- form page starts -->
       <div id="page3" class="page hidden">
-        <section class="container-fluid ht-100vh rounded-3" id="buddy-page">
+        <section class="container-fluid ht-100vh" id="buddy-page">
+          <div class="row d-none d-lg-block"style="min-height: 5rem;"></div>
           <div class="row">
             <div class="col-3 d-none d-lg-block"></div>
-            <header class="col px-5 pb-2 pt-3 border border-danger d-flex">
-              <h1 class="display-5"> Find a workout buddy</h1>
+            <header class="col px-5 pb-2 pt-3 d-flex">
+              <h1> Find a workout buddy</h1>
               <button 
               type="button"
               onclick="closeBuddyForm()"
-              class="ms-auto btn-close btn btn-outline-danger border border-3 border-danger" 
+              class="ms-auto btn align-self-start" 
               aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
             </button>
           </header>
             <div class="col-3 d-none d-lg-block"></div>
           </div>
 
-          <div class="row border border-danger gx-2">
+          <div class="row">
             <div class="col-3 d-none d-lg-block"></div>
-            <div class="col p-2 border border-info border-3">
+            <div class="col p-2">
               <div id="form">
                 <div class="row mb-3">
                   <label class="col-2" for="name">Name:</label>
@@ -323,7 +325,7 @@
                     <div id="emailValidation"><br></div>
                   </div>
                 </div>
-                <div class="row border border-danger mb-3">
+                <div class="row mb-3">
                   <label class="col-2">Activity:</label>
                   <div class="col">
                     <div class="form-check">
@@ -419,7 +421,7 @@
                         >
                       </label>
                     </div>
-                    <div id="tNcValidation"></div>
+                    <div id="tNcValidation"><br></div>
                     <input
                   type="submit"
                   class="btn my-3"

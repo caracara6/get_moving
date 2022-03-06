@@ -194,8 +194,9 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "gym");
+        showResults();
+        
         plotSearchCoordinates(response.results, "icons/dumbbell.svg", sportClusterLayer);
-        // sportClusterLayer.addTo(map);
       });
 
       let basketballBtn = document.querySelector("#basketballBtn");
@@ -208,6 +209,8 @@ async function main() {
           mapCenter.lng,
           "basketball"
         );
+        showResults();
+
         plotSearchCoordinates(response.results, "icons/basketball.svg", sportClusterLayer);
       });
 
@@ -217,6 +220,8 @@ async function main() {
         resetMap();
         mapCenter = map.getBounds().getCenter();
         let response = await searchSport(mapCenter.lat, mapCenter.lng, "golf");
+        showResults();
+
         plotSearchCoordinates(response.results, "icons/golf.svg", sportClusterLayer);
       });
 
@@ -230,6 +235,8 @@ async function main() {
           mapCenter.lng,
           "bowling"
         );
+        showResults();
+
         plotSearchCoordinates(response.results, "icons/bowling.svg", sportClusterLayer);
       });
 
@@ -243,6 +250,8 @@ async function main() {
           mapCenter.lng,
           "swimming"
         );
+        showResults();
+
         plotSearchCoordinates(response.results, "icons/swimming.svg", sportClusterLayer);
       });
 
@@ -256,6 +265,8 @@ async function main() {
           mapCenter.lng,
           "volleyball"
         );
+      showResults();
+
         plotSearchCoordinates(response.results, "icons/volleyball.svg", sportClusterLayer);
       });
 
@@ -305,11 +316,17 @@ async function main() {
 
       let buddyBtn = document.querySelector("#buddyBtn");
       buddyBtn.addEventListener("click", function () {
+        //close nav results for less clutter
+        document.querySelector("#dropdownButton").classList.remove("show");
+        document.querySelector("#infoTabSearchResults").classList.remove("show");
+
+        //reset all form fields
         document.querySelector('#submitResponse').innerHTML = `<span><br></span>`
         resetRadioBtn('radio');
         resetDate('date');
         resetCheckboxes('checkbox');
         resetTextInput('text');
+        
         showBuddyForm();
       });
 
@@ -504,7 +521,7 @@ async function main() {
     // Initialise map
     singapore = [1.3069, 103.8189];
     map = L.map("singaporeMap");
-    map.setView(singapore, 12);
+    map.setView(singapore, 1);
 
     // Add light layer
     lightMode = L.tileLayer(
@@ -537,18 +554,6 @@ async function main() {
       }
     );
     darkMode.addTo(map);
-    // darkMode = L.tileLayer(
-    //   "https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}",
-    //   {
-    //     attribution:
-    //       '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    //     minZoom: 0,
-    //     maxZoom: 22,
-    //     subdomains: "abcd",
-    //     accessToken:
-    //       "GSRGuSqDDcYgQnf3k9ESutlUBugw4YctZAzWNSE7iZLhxb0jQZLuHbOXq5etkVAQ",
-    //   }
-    // );
 
     let userMarker = L.marker(singapore, { draggable: true });
     let popup = userMarker.bindPopup("Hello");
@@ -559,10 +564,8 @@ async function main() {
       '<i class="fa-solid fa-sun"></i>': lightMode,
       '<i class="fa-solid fa-cloud-moon"></i>' : darkMode,
     };
-
-    // Set up overlays
+    
     overlays = {
-      // "Search Results": searchLayer
     };
 
     // {collapsed=false}??
