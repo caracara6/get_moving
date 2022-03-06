@@ -290,13 +290,6 @@ async function main() {
         resetMap();
         showMapPage();
 
-        // let surpriseModal = bootstrap.Modal.getInstance(document.getElementById('surpriseModal'))
-        // surpriseModal.hide();
-
-        //         // let surpriseModal = document.getElementById('surpriseModal');
-        //         // surpriseModal.hide();
-        //         // close modal here
-
         mapCenter = map.getBounds().getCenter();
 
         let response = await searchPlaces(

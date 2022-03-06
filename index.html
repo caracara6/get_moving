@@ -36,6 +36,47 @@
   </head>
 
   <body>
+    <!-- surprise modal starts-->
+    <div
+    class="modal fade"
+    id="surpriseModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Why don't you try...
+          </h5>
+          <button
+            type="button"
+            class="btn"
+            onclick="playVid()"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <lead id="randomSport"></lead>
+          <div><img id="randomSportImage" src="" alt="" /></div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn"
+            id="letsGoBtn"
+            onclick="playVid()"
+            data-bs-dismiss="modal"
+          >
+            Let's Go
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- surprise modal ends -->
     <div id="allPages">
       <!-- landing page starts -->
       <div id="page1" class="page">
@@ -91,48 +132,6 @@
               >
                 Surprise me
               </button>
-
-              <!-- surprise modal starts-->
-              <div
-                class="modal fade"
-                id="surpriseModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content shadow">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
-                        Why don't you try...
-                      </h5>
-                      <button
-                        type="button"
-                        class="btn"
-                        onclick="playVid()"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    <div class="modal-body">
-                      <lead id="randomSport"></lead>
-                      <div><img id="randomSportImage" src="" alt="" /></div>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn"
-                        id="letsGoBtn"
-                        onclick="playVid()"
-                        data-bs-dismiss="modal"
-                      >
-                        Let's Go
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- surprise modal ends -->
             </div>
           </div>
         </section>
@@ -217,7 +216,7 @@
               <i class="fa-solid fa-location-crosshairs"></i>
             </span>
           </div>
-          <p id="mapSearchValidation" class="my-0 ms-1"><br></p>
+          <p id="mapSearchValidation" class="my-0 ms-1 color-change"><br></p>
           </div>
           <!-- map search ends -->
           <div id="buddy-icon">

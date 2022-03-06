@@ -169,6 +169,7 @@ function resetMap() {
   cyclingLayer.clearLayers();
   map.setView(singapore, 12);
 }
+
 function showResults(){
   document.querySelector("#dropdownButton").classList.add("show");
   document.querySelector("#infoTabSearchResults").classList.add("show");

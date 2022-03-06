@@ -12,6 +12,7 @@ h1 {
 #page3 h1 {
   font-size: 2rem;
 }
+
 p {
   color: white;
   font-size: .9rem;
@@ -41,6 +42,7 @@ body {
   box-sizing: border-box;
   width: 100%;
 }
+
 #page1{
   height: 100vh!important;
   width: 100vw;
@@ -62,7 +64,8 @@ body {
 }
 
 #mapSearchBar ::placeholder{
-  color: white !important;
+  color: red!important;
+  font-weight:700!important;
 }
 
 .leaflet-control-container .fa-solid{
@@ -75,6 +78,7 @@ header .lead-1 {
   font-weight: 300;
   color: white;
 }
+
 header .lead-2 {
   font-family: 'Taviraj', serif;
   font-size: 1.5rem;
@@ -104,6 +108,7 @@ header .lead-2 {
   color: white;
   /* font-weight: 900; */
 }
+
 #locationSearchBtn:hover, #mapSearchBtn:hover, #mapSearchInput:hover{
   background-color:rgba(255,0,0,0.5) !important;
   color:white;
@@ -128,6 +133,7 @@ button{
 button:hover {
   background-color:rgba(255, 0, 0, 0.4) !important;
 }
+
 .modal-content{
   background-color:rgba(75, 69, 69, 0.8);
 }
@@ -136,6 +142,7 @@ button:hover {
   color: white;
   font-family: 'Taviraj', serif;
 }
+
 .modal-body{
   color: white;
   text-align: center;
@@ -199,6 +206,7 @@ button:hover {
   margin: 0px;
   transform: translate3d(-4px, 54px, 0px);
 }
+
 .dropdownPosition{
   position: absolute;
   inset: 0px auto auto 0px;
@@ -270,28 +278,23 @@ button:hover {
   filter: invert(100%) sepia(1%) saturate(677%) hue-rotate(268deg) brightness(122%) contrast(100%);
 }
 
-/* target all svg icons when in dark mode to invert to white */
 .dark-mode .leaflet-marker-pane img {
   filter: invert(100%) sepia(1%) saturate(677%) hue-rotate(268deg) brightness(122%) contrast(100%);
 }
-
-/* .leaflet-popup-content-wrapper:not(.popupPhoto) */
 
 .light-mode .leaflet-marker-pane img {
   filter: invert(0%) sepia(1%) saturate(4690%) hue-rotate(115deg) brightness(79%) contrast(100%);
 }
 
-
 .pale-red-bg{
   background-color: rgba(250, 52, 52, 0.445)
 }
+
 #page3 span{
  color:white;
 }
+
 @media screen and (min-width: 768px) {
-  /* #infoTab{
-    font-size: 1.5rem;
-  } */
   .sportsIcon{
     margin-left: 0.5rem !important;
     margin-right: 0.5rem !important;
