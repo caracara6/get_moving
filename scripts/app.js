@@ -82,7 +82,7 @@ async function main() {
             mapCenter.lat,
             mapCenter.lng,
             searchInput,
-            10
+            15
           );
 
           if (response.results.length == 0){
@@ -123,7 +123,7 @@ async function main() {
             mapCenter.lat,
             mapCenter.lng,
             searchInput,
-            8
+            15
           );
 
           if (response.results.length == 0){
@@ -161,7 +161,7 @@ async function main() {
             userLocation[0],
             userLocation[1],
             searchInput,
-            8
+            15
           );
 
           if (response.results.length == 0){
@@ -297,7 +297,7 @@ async function main() {
           mapCenter.lat,
           mapCenter.lng,
           randomSportSearch,
-          8
+          15
         );
 
         showResults();

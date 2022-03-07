@@ -50,7 +50,8 @@ As a user who mostly exercises in the gym, I want suggestions of new sports/acti
 
 #### Strategy
 
-* B2C (Business to User)
+* B2C (Business to User - user can utilise the app for free but pay a small fee to be matched with a suitable workout partner)
+* B2B (Businesses can pay a premium for their location to be featured with a higher priority)
 
 * User: People who wish to be/stay physically active
 
@@ -105,7 +106,7 @@ _Colour Scheme_
 
 * The app mainly utilises neutral colours of black, grey and white, which can draw users in to focus on the defining, important components of the app.
 
-* The accent colours of red and pale-red were chosen as this colour is associated with passion, zeal, and energy, which ties in with the app's overall theme.
+* The accent colour of red was chosen as this colour is associated with passion, zeal, and energy, which ties in with the app's overall message.
 
 _Font Choice_
 
@@ -154,7 +155,7 @@ _Font Choice_
 
 ## Deployment
 
-The web app is hosted on [GitHub Pages](https://pages.github.com/)
+The web app is hosted on Github Pages, and the deployment instructions can be found [here](https://pages.github.com/)
 
 ## Limitations
 

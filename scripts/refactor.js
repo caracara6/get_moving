@@ -8,7 +8,7 @@ async function searchPlaces(lat, lng, query, limit) {
       ll: ll,
       v: 20220221,
       query: query,
-      radius: 12000,
+      radius: 20000,
       categories: 18000,
       limit: limit,
     },
