@@ -255,9 +255,9 @@ function resetFormError() {
 }
 
 let bottom = 0;
-let isJumping = false;
+let jumpingNow = false;
 function jump(el){
-  if(isJumping)
+  if(jumpingNow)
   return
   let upTimer = setInterval(function(){
     if(bottom >= 8){
@@ -265,13 +265,13 @@ function jump(el){
       let downTimer = setInterval(function() {
         if(bottom <= 2){
           clearInterval(downTimer);
-          isJumping = false;
+          jumpingNow = false;
         }
         bottom -=2;
         document.querySelector(el).style.bottom = bottom + 'px';
       }, 15)
     }
-    isJumping = true;
+    jumpingNowin = true;
     bottom += 2;
     document.querySelector(el).style.bottom = bottom + 'px';
   }, 15)

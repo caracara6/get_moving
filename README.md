@@ -1,5 +1,7 @@
 # Get Moving
 
+<img src='images/demo_photo.jpg'/><br>
+
 The live demo can be found [here](https://caracara6.github.io/get_moving/).
 
 ## Project Summary
@@ -19,11 +21,12 @@ _Get Moving_ is a website which allows users to easily search public- and privat
 
 * Characteristics:
     1. Attitude: motivated to keep fit/make new friends through working out
-    * _Health is wealth_
+    * mindset: _Health is wealth_
     2. Behaviour: May lead either active or sedentary lifestyles
+    3. Open to new adventures/meeting new people
 
-* Suggest a new sport/activity to users, allowing users to immerse in something fresh to them
 * Search for the nearest sport facility to their location
+* Suggest a new sport/activity to users, allowing users to immerse in something fresh to them
 * Work in progress - find a workout partner 
 
 ### Organisational Goals
@@ -54,7 +57,8 @@ As a user who mostly exercises in the gym, I want suggestions of new sports/acti
 * User Needs: Find nearest/try undiscovered sports facilities
 
 * User Pain Points: 
-> * No consolidated resource of all sports facilites in Singapore, thus have to Google for their location separately.
+    * No consolidated resource of all sports facilites in Singapore, thus have to Google for their location separately.
+    * Difficult to find a workout partner through other means such as social media due to the lack of context
 
 #### Scope
 
@@ -68,6 +72,7 @@ _Functional Requirements_
 
 _Content requirements_
 * Name of sports facility
+* What sports/exercise can be done at the facility
 * Address of sports facility
 * Image of sports facility
 
@@ -124,7 +129,7 @@ _Font Choice_
     * Used to create main components such as results display and buttons, and to direct layout with grid system
 
 * Javascript
-    * Used for dynamic action and more user interaction 
+    * Used for dynamic action, manipulating dom elements and more user interaction 
 
 * [Leaflet](https://leafletjs.com/)
     * Used to create the map feature

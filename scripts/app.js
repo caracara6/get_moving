@@ -274,6 +274,7 @@ async function main() {
         informCyclingElement.className='resultList';
         informCyclingElement.innerHTML = "Explore the cycling paths around Singapore";
         searchResultElement.appendChild(informCyclingElement);
+        showResults();
         cyclingLayer.addTo(map);
       });
 
