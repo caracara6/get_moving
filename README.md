@@ -1,6 +1,6 @@
 # Get Moving
 
-The live demo can be found here.
+The live demo can be found [here](https://caracara6.github.io/get_moving/).
 
 ## Project Summary
 
@@ -13,7 +13,14 @@ _Get Moving_ is a website which allows users to easily search public- and privat
 * Target audience: 
     1. Anyone interested in leading a more active lifestyle, with a positive attitude to sports and keeping fit
     2. People who may be interested in trying new sporting activities
-    3. Target age group is a wide range from 18 years old to 60 years old
+    3. Tertiary students to working adults
+    4. Target age demographics is a wide range from 18 years old to 60 years old
+    5. No specific target ethnicity
+
+* Characteristics:
+    1. Attitude: motivated to keep fit/make new friends through working out
+    * _Health is wealth_
+    2. Behaviour: May lead either active or sedentary lifestyles
 
 * Suggest a new sport/activity to users, allowing users to immerse in something fresh to them
 * Search for the nearest sport facility to their location
@@ -22,6 +29,10 @@ _Get Moving_ is a website which allows users to easily search public- and privat
 ### Organisational Goals
 
 * The app aims to consolidate and locate all sports facilities in Singapore, and help meet user goals with an easy-to-use and responsive interface.
+
+### Justification for the site
+
+* The app helps users easily locate the nearest sports facility to them, as well as all around Singapore. Users can also be matched with suitable partners for sports which are more meaningful when played with one or more person.
 
 ## UI/UX
 
@@ -140,6 +151,15 @@ _Font Choice_
 
 The web app is hosted on [GitHub Pages](https://pages.github.com/)
 
+## Limitations
+
+* Due to the scope limitation of this project, user particulars are not being processed in the backend
+
+* Foursquare API key is visible to all internet traffic
+
+* Not all search results return a photo, in which case a default photo will be used. However, this may not be meaningful to that particular search result. 
+
+* Local data of the random array of sports has to be updated manually and in a timely manner
 
 
 ## Attribution

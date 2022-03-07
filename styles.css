@@ -106,7 +106,6 @@ header .lead-2 {
 #mapSearchInput:focus, #searchInput:focus{
   background-color:rgba(255, 0, 0, 0.4) !important;
   color: white;
-  /* font-weight: 900; */
 }
 
 #locationSearchBtn:hover, #mapSearchBtn:hover, #mapSearchInput:hover{
@@ -194,10 +193,9 @@ button:hover {
 
 #infoTabSearchResults {
   position: absolute;
-  /* inset: 0px auto auto 0px;
-  margin: 0px;
-  transform: translate3d(-57px, 42px, 0px); */
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
+  max-height: 20rem;
+  overflow-y: scroll;
 }
 
 .dropdownPositionMin992{
@@ -242,7 +240,7 @@ button:hover {
 }
 
 #buddy-page{
-  background: rgba(75, 69, 69, 0.8)
+  background: rgba(75, 69, 69, 0.85)
 }
 
 #buddy-icon {
@@ -260,6 +258,26 @@ button:hover {
 #buddy-page label {
   font-size: 1.5 rem;
   color: white;
+}
+
+.leaflet-popup-content-wrapper{
+  font-family: 'Taviraj', serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.leaflet-popup-content-wrapper ul {
+line-height: 1.6;
+}
+
+.leaflet-container a.leaflet-popup-close-button{
+  color: grey;
+}
+
+.leaflet-marker-pane span{
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .black{
@@ -293,6 +311,12 @@ button:hover {
 #page3 span{
  color:white;
  font-family: 'Taviraj', serif;
+ font-size: 0.8rem;
+}
+
+#tNc{
+  color: white;
+  text-decoration: bold;
 }
 
 @media screen and (min-width: 768px) {
@@ -311,6 +335,9 @@ button:hover {
     top: 15px;
     bottom: unset;
   }
+  #infoTabSearchResults{
+    max-height: 25rem;
+  }
   #buddy-icon{
     bottom: 3rem
   }
@@ -328,6 +355,9 @@ button:hover {
   header .lead-2 {
     font-size: 1.8rem;
   }
+  .leaflet-popup-content-wrapper{
+    font-size: 1.1rem;
+  }
 }
 
 @media screen and (min-width: 992px){
@@ -343,5 +373,8 @@ button:hover {
   }
   #mapSearchInput{
     font-size: 1.25rem;
+  }
+  #infoTabSearchResults{
+    max-height: 30rem;
   }
 }

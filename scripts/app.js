@@ -379,7 +379,7 @@ async function main() {
         } 
 
         if (ageMonth < 0 || (ageMonth == 0 && ageDay < 0)) {
-          ageYear = parseInt(ageYear) - 1;
+          ageYear = Number(ageYear) - 1;
         }
 
         if (ageYear > 100) {
@@ -553,5 +553,4 @@ async function main() {
   }
   init();
 }
-
 main();

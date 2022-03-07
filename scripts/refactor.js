@@ -45,7 +45,7 @@ async function searchSport(lat, lng, sport) {
       query: sport,
       radius: 25000,
       categories: 18000,
-      limit: 10,
+      limit: 20,
     },
     headers: {
       Accept: "application/json",
@@ -88,7 +88,7 @@ async function plotSearchCoordinates(response, iconUrl, layer) {
       <li><span>${eachResult.location.post_town}</span></li>
       </ul>
       </div>
-      <div class="my-2"><img class="popupPhoto rounded-3" src='${resultPhotoUrl}'/></div>
+      <img class="popupPhoto rounded-3 my-2 d-block shadow" src='${resultPhotoUrl}'/>
             </div>`);
 
     resultMarker.addTo(layer);
