@@ -10,7 +10,11 @@ _Get Moving_ is a website which allows users to easily search public- and privat
 
 ### User Goals
 
-* Audience: anyone interested in leading a more active lifestyle, with the target age group being from 18 years old to 60 years old
+* Target audience: 
+    1. Anyone interested in leading a more active lifestyle, with a positive attitude to sports and keeping fit
+    2. People who may be interested in trying new sporting activities
+    3. Target age group is a wide range from 18 years old to 60 years old
+
 * Suggest a new sport/activity to users, allowing users to immerse in something fresh to them
 * Search for the nearest sport facility to their location
 * Work in progress - find a workout partner 
@@ -74,6 +78,8 @@ _Non-functional requirements_
 
 #### Skeleton
 
+Wireframes for mobile and laptop display for the website are [here](wireframes/get_moving_wireframe.pdf)
+
 #### Surface
 
 _Colour Scheme_
@@ -98,39 +104,43 @@ _Font Choice_
 ## Technologies Used
 
 * HTML5 (HyperText Markup Language)
-> * Created web app framework
+    * Created web app framework
 
 * CSS (Cascading Style Sheets)
-> * Used to style the elements of the app
+    * Used to style the elements of the app
 
 * [Bootstrap 5.1](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
-> * Used to create main components such as results display and buttons, and to direct layout with grid system
+    * Used to create main components such as results display and buttons, and to direct layout with grid system
 
 * Javascript
-> * Used for dynamic action and more user interaction 
+    * Used for dynamic action and more user interaction 
 
 * [Leaflet](https://leafletjs.com/)
-> * Used to create the map feature
+    * Used to create the map feature
 
 * [Leaflet Cluster](https://github.com/Leaflet/Leaflet.markercluster)
-> * Clustering plugin for leaflet
+    * Clustering plugin for leaflet
 
 * [Mapbox](https://www.mapbox.com/)
-> * Used to provide tile layers on map
+    * Used to provide tile layers on map
 
 * [Foursquare API](https://developer.foursquare.com/)
-> * Access to data
+    * Access to data
 
 * [Axios](https://www.npmjs.com/package/axios)
-> * HTTP Client for browser
+    * HTTP Client for browser
 
 * [Font Awesome](https://fontawesome.com/)
-> * Used free icons in navbar
+    * Used free icons in navbar
 
 * [diagrams.net](https://app.diagrams.net/)
-> * Used to draw UI/UX Structure flowchart
+    * Used to draw UI/UX Structure flowchart
 
 ## Deployment
+
+The web app is hosted on [GitHub Pages](https://pages.github.com/)
+
+
 
 ## Attribution
 
@@ -138,13 +148,13 @@ _Font Choice_
 * [Data.gov.sg](https://data.gov.sg/)
 
 #### Fonts
-* [Google Fonts](https://fonts.google.com/);
+* [Google Fonts](https://fonts.google.com/)
 * [Creative Fabrica](https://www.creativefabrica.com/)
 
 #### Photos
 * [Pexels](https://www.pexels.com/)
 
-#### Video
+#### Videos
 * [Videvo](https://www.videvo.net/)
 
 #### Guidance
