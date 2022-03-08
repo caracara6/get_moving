@@ -271,7 +271,7 @@ function jump(el){
         document.querySelector(el).style.bottom = bottom + 'px';
       }, 15)
     }
-    jumpingNowin = true;
+    jumpingNow = true;
     bottom += 2;
     document.querySelector(el).style.bottom = bottom + 'px';
   }, 15)

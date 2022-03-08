@@ -550,6 +550,8 @@ async function main() {
       .layers(baseMaps, overlays, { position: "bottomright" })
       .addTo(map);
 
+      // L.control.setPosition("bottomright")
+
     return map;
   }
   init();
